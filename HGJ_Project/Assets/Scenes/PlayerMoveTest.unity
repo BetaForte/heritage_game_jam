@@ -249,7 +249,7 @@ MonoBehaviour:
   chargeValue: 0
   maxChargeValue: 50
   rotationSpeed: 200
-  changeDirectionSpeed: 0.5
+  changeDirectionSpeed: 1
   fired: 0
 --- !u!1 &304923490
 GameObject:
