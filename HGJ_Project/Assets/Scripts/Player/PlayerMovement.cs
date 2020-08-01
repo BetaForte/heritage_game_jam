@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     Vector3 currentDirection;
 
     public bool fired;
+    public bool charging;
 
     Rigidbody rb;
 
@@ -37,10 +38,14 @@ public class PlayerMovement : MonoBehaviour
         if(Input.GetKey(KeyCode.Space))
         {
             if(!fired)
-            chargeValue += Time.deltaTime * 25;
+            {
+                chargeValue += Time.deltaTime * 25;
+                charging = true;
+            }
 
             if (chargeValue >= maxChargeValue)
             {
+                charging = false;
                 fired = true;
                 releasedDirection = transform.forward;
                 rb.velocity = transform.forward * chargeValue;
@@ -51,6 +56,7 @@ public class PlayerMovement : MonoBehaviour
         if(Input.GetKeyUp(KeyCode.Space))
         {
             releasedDirection = transform.forward;
+            charging = false;
             fired = true;
         }
     }
