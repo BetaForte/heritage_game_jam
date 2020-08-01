@@ -19,13 +19,17 @@ public class PlayerUI : MonoBehaviour
     {
         gauge.SetActive(false);
         speedMetre.SetActive(true);
+        speedText.text = "0 km/h";
     }
 
     void Update()
     {
         PlayerCharging();
 
-        speedText.text = Mathf.Round(player.chargeValue) + " km/h";
+        if(player.fired)
+        {
+            speedText.text = Mathf.Round(player.chargeValue) + " km/h";
+        }
     }
 
     private void PlayerCharging()
