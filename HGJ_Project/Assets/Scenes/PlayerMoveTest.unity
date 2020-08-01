@@ -248,7 +248,8 @@ MonoBehaviour:
   cinemachine: {fileID: 2090035576}
   chargeValue: 0
   maxChargeValue: 50
-  rotationSpeed: 10
+  rotationSpeed: 200
+  changeDirectionSpeed: 0.5
   fired: 0
 --- !u!1 &304923490
 GameObject:
@@ -983,7 +984,7 @@ Transform:
   m_GameObject: {fileID: 1240748635}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.68762, y: 1.6829271, z: -0.42546}
-  m_LocalScale: {x: 1.5269, y: 1.5269, z: 13.85892}
+  m_LocalScale: {x: 11.053993, y: 11.053993, z: 100.33165}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1

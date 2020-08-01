@@ -10,6 +10,10 @@ public class PlayerMovement : MonoBehaviour
     public float chargeValue;
     public float maxChargeValue;
     public float rotationSpeed = 10.0f;
+    public float changeDirectionSpeed;
+
+    Vector3 releasedDirection;
+    Vector3 currentDirection;
 
     public bool fired;
 
@@ -38,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
             if (chargeValue >= maxChargeValue)
             {
                 fired = true;
+                releasedDirection = transform.forward;
                 rb.velocity = transform.forward * chargeValue;
             }
 
@@ -45,6 +50,7 @@ public class PlayerMovement : MonoBehaviour
 
         if(Input.GetKeyUp(KeyCode.Space))
         {
+            releasedDirection = transform.forward;
             fired = true;
         }
     }
@@ -53,18 +59,23 @@ public class PlayerMovement : MonoBehaviour
     {
         if (fired)
         {
+            currentDirection = transform.forward;
+
             chargeValue -= Time.deltaTime * 15;
-            if(Input.GetKey(KeyCode.D))
+
+            if (Input.GetKey(KeyCode.D))
             {
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(transform.rotation.x, transform.rotation.y + 45, transform.rotation.z), Time.deltaTime * rotationSpeed);
+                transform.rotation = Quaternion.Euler(0f, rotationSpeed * Time.deltaTime, 0f) * transform.rotation;
             }
 
             if (Input.GetKey(KeyCode.A))
             {
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(transform.rotation.x, transform.rotation.y - 45, transform.rotation.z), Time.deltaTime * rotationSpeed);
+                transform.rotation = Quaternion.Euler(0f, -rotationSpeed * Time.deltaTime, 0f) * transform.rotation;
             }
 
-            rb.velocity = transform.forward * chargeValue;
+            releasedDirection = Vector3.MoveTowards(releasedDirection, currentDirection, Time.deltaTime * changeDirectionSpeed);
+
+            rb.velocity = releasedDirection* chargeValue;
         }
 
         if(chargeValue <= 0)
