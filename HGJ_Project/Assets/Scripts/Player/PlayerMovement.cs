@@ -35,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
         Fire();
 
 
+
         transform.localRotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, 0);
 
 
@@ -48,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
                 rb.constraints = RigidbodyConstraints.FreezeRotationZ;
             }
 
-            Quaternion finalRotation = Quaternion.Euler(0, transform.rotation.y, 0);
+            Quaternion finalRotation = Quaternion.Euler(0, transform.eulerAngles.y, 0);
             transform.localRotation = Quaternion.Slerp(transform.rotation, finalRotation, Time.deltaTime * 5);
         }
         else
@@ -59,6 +60,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         rb.AddForce(0, -5, 0);
+
 
         if (Input.GetKey(KeyCode.D))
         {
@@ -108,15 +110,19 @@ public class PlayerMovement : MonoBehaviour
 
             chargeValue -= Time.deltaTime / chargeTime;
 
-            releasedDirection = Vector3.MoveTowards(releasedDirection, currentDirection, Time.deltaTime * changeDirectionSpeed);
+            if(isGrounded)
+            {
+                releasedDirection = Vector3.MoveTowards(releasedDirection, currentDirection, Time.deltaTime * changeDirectionSpeed);
+            }
 
             if (chargeValue <= 0)
+            {
                 rb.velocity = Vector3.zero;
+            }
             else
             {
-                rb.velocity = releasedDirection * vehicleMaxSpeed;
-                //rb.AddForce(releasedDirection * vehicleMaxSpeed / 100, ForceMode.VelocityChange);
-
+                Vector3 direction = new Vector3(releasedDirection.x, releasedDirection.y -= Time.deltaTime * 1.5f, releasedDirection.z);
+                rb.velocity = direction * vehicleMaxSpeed;
             }
 
         }
