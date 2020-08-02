@@ -19,12 +19,17 @@ public class PlayerMovement : MonoBehaviour
     public bool fired;
     public bool charging;
 
+    public float xClamp;
+    float yClamp;
+
+
     Rigidbody rb;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         cinemachine.m_XAxis.m_MaxSpeed = 0;
+
     }
 
     private void Update()
@@ -32,6 +37,9 @@ public class PlayerMovement : MonoBehaviour
         LookAround();
         Charging();
         Fire();
+
+        transform.localRotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, 0);
+
 
         rb.AddForce(0, -5, 0);
 
