@@ -38,13 +38,24 @@ public class PlayerMovement : MonoBehaviour
         transform.localRotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, 0);
 
 
-        if (!charging && !fired && chargeValue <= 0 && isGrounded)
+        if (!charging && !fired && chargeValue <= 0)
         {
-            rb.isKinematic = true;
+            if (isGrounded)
+            {
+                rb.velocity = Vector3.zero;
+                rb.constraints = RigidbodyConstraints.FreezeRotationX;
+                rb.constraints = RigidbodyConstraints.FreezeRotationY;
+                rb.constraints = RigidbodyConstraints.FreezeRotationZ;
+            }
+
+            Quaternion finalRotation = Quaternion.Euler(0, transform.rotation.y, 0);
+            transform.localRotation = Quaternion.Slerp(transform.rotation, finalRotation, Time.deltaTime * 5);
         }
         else
         {
-            rb.isKinematic = false;
+            rb.constraints = RigidbodyConstraints.None;
+            rb.constraints = RigidbodyConstraints.FreezeRotationY;
+            rb.constraints = RigidbodyConstraints.FreezeRotationZ;
         }
 
         rb.AddForce(0, -5, 0);
@@ -67,11 +78,11 @@ public class PlayerMovement : MonoBehaviour
         {
             if (!fired)
             {
-                chargeValue += Time.deltaTime * 25;
+                chargeValue += Time.deltaTime;
                 charging = true;
             }
 
-            if (chargeValue >= vehicleMaxSpeed)
+            if (chargeValue >= chargeTime)
             {
                 charging = false;
                 fired = true;
@@ -95,7 +106,7 @@ public class PlayerMovement : MonoBehaviour
         {
             currentDirection = transform.forward;
 
-            chargeValue -= Time.deltaTime * chargeTime;
+            chargeValue -= Time.deltaTime / chargeTime;
 
             releasedDirection = Vector3.MoveTowards(releasedDirection, currentDirection, Time.deltaTime * changeDirectionSpeed);
 
