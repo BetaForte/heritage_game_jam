@@ -19,8 +19,6 @@ public class PlayerMovement : MonoBehaviour
     public bool fired;
     public bool charging;
 
-    public List<Ramps.RampAngle> previousRamp = new List<Ramps.RampAngle>();
-
     Rigidbody rb;
 
     private void Start()
@@ -109,98 +107,6 @@ public class PlayerMovement : MonoBehaviour
             cinemachine.m_XAxis.m_MaxSpeed = 300;
         else if(Input.GetMouseButtonUp(1))
             cinemachine.m_XAxis.m_MaxSpeed = 0;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.tag == "Ramp")
-        {
-            Ramps ramp = other.GetComponent<Ramps>();
-            switch(ramp.rampAngle)
-            {
-                case Ramps.RampAngle.Left:
-                    Quaternion leftAngle = Quaternion.Euler(-28.14f, 0, 0);
-                    transform.rotation = Quaternion.Slerp(transform.rotation, leftAngle, 10);
-                    break;
-                case Ramps.RampAngle.Right:
-                    Quaternion rightAngle = Quaternion.Euler(28.14f, -180, 0);
-                    transform.rotation = Quaternion.Slerp(transform.rotation, rightAngle, 10);
-                    break;
-                case Ramps.RampAngle.Up:
-                    if(previousRamp.Count == 0)
-                    {
-                        Quaternion upAngle = Quaternion.Euler(-28.14f, 90f, 0);
-                        transform.rotation = Quaternion.Slerp(transform.rotation, upAngle, 10);
-                        previousRamp.Add(Ramps.RampAngle.Up);
-                    }
-
-                    else if (previousRamp[previousRamp.Count - 1] != Ramps.RampAngle.Down)
-                    {
-                        Quaternion upAngle = Quaternion.Euler(-28.14f, 90f, 0);
-                        transform.rotation = Quaternion.Slerp(transform.rotation, upAngle, 10);
-                        previousRamp.Add(Ramps.RampAngle.Up);
-                    }
-                    break;
-                case Ramps.RampAngle.Down:
-                    if(previousRamp.Count == 0)
-                    {
-                        Quaternion downAngle = Quaternion.Euler(-28.14f, -90, 0);
-                        transform.rotation = Quaternion.Slerp(transform.rotation, downAngle, 10);
-                        previousRamp.Add(Ramps.RampAngle.Down);
-                        return;
-                    }
-                    else if(previousRamp[previousRamp.Count - 1] != Ramps.RampAngle.Up)
-                    {
-                        Quaternion downAngle = Quaternion.Euler(-28.14f, -90, 0);
-                        transform.rotation = Quaternion.Slerp(transform.rotation, downAngle, 10);
-                        previousRamp.Add(Ramps.RampAngle.Down);
-                    }
-                    break;
-            }
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.tag == "Ramp")
-        {
-            Ramps ramp = other.GetComponent<Ramps>();
-            switch (ramp.rampAngle)
-            {
-                case Ramps.RampAngle.Left:
-                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, 0), 10);
-                    break;
-                case Ramps.RampAngle.Right:
-                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 180, 0), 10);
-                    break;
-                case Ramps.RampAngle.Up:
-                    if(previousRamp.Count == 0)
-                    {
-                        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 90f, 0), 10);
-                    }
-                    else if (previousRamp[previousRamp.Count - 1] != Ramps.RampAngle.Down || previousRamp.Count == 0)
-                    {
-                        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 90f, 0), 10);
-                    }
-                    break;
-                case Ramps.RampAngle.Down:
-                    if (previousRamp.Count == 0)
-                    {
-                        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, -90, 0), 10);
-
-                    }
-                    else if(previousRamp[previousRamp.Count - 1] != Ramps.RampAngle.Up || previousRamp.Count == 0)
-                    {
-                        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, -90, 0), 10);
-                    }
-                    break;
-            }
-        }
-
-        if(other.tag == "Clear")
-        {
-            previousRamp.Clear();
-        }
     }
 
 
