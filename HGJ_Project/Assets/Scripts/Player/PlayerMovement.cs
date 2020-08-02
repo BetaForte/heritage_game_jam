@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using Photon.Pun;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviourPun
 {
     public CinemachineFreeLook cinemachine;
+    public Rigidbody rb;
 
     public float chargeValue;
     public float chargeTime;
@@ -13,18 +15,16 @@ public class PlayerMovement : MonoBehaviour
     public float rotationSpeed = 10.0f;
     public float changeDirectionSpeed;
 
-    public Vector3 releasedDirection;
-    public Vector3 currentDirection;
+    Vector3 releasedDirection;
+    Vector3 currentDirection;
 
     public bool fired;
     public bool charging;
     public bool isGrounded;
 
-    Rigidbody rb;
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
         cinemachine.m_XAxis.m_MaxSpeed = 0;
     }
 
@@ -33,11 +33,25 @@ public class PlayerMovement : MonoBehaviour
         LookAround();
         Charging();
         Fire();
+        FixPlayerRotation();
+
+        rb.AddForce(0, -5, 0);
 
 
+        if (Input.GetKey(KeyCode.D))
+        {
+            transform.rotation = Quaternion.Euler(0f, rotationSpeed * Time.deltaTime, 0f) * transform.rotation;
+        }
 
-        transform.localRotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, 0);
+        if (Input.GetKey(KeyCode.A))
+        {
+            transform.rotation = Quaternion.Euler(0f, -rotationSpeed * Time.deltaTime, 0f) * transform.rotation;
+        }
+    }
 
+    [PunRPC]
+    private void FixPlayerRotation()
+    {
 
         if (!charging && !fired && chargeValue <= 0)
         {
@@ -57,19 +71,6 @@ public class PlayerMovement : MonoBehaviour
             rb.constraints = RigidbodyConstraints.None;
             rb.constraints = RigidbodyConstraints.FreezeRotationY;
             rb.constraints = RigidbodyConstraints.FreezeRotationZ;
-        }
-
-        rb.AddForce(0, -5, 0);
-
-
-        if (Input.GetKey(KeyCode.D))
-        {
-            transform.rotation = Quaternion.Euler(0f, rotationSpeed * Time.deltaTime, 0f) * transform.rotation;
-        }
-
-        if (Input.GetKey(KeyCode.A))
-        {
-            transform.rotation = Quaternion.Euler(0f, -rotationSpeed * Time.deltaTime, 0f) * transform.rotation;
         }
     }
 

@@ -4,12 +4,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
+using UnityEngine.SceneManagement;
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
     [Header("Login UI")]
     public GameObject LoginUIPanel;
     public InputField playerNameInput;
+
+    [Header("Lobby Panel")]
+    public GameObject LobbyPanel;
 
     [Header("Connecting Panel")]
     public GameObject ConnectingPanel;
@@ -18,6 +22,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         LoginUIPanel.SetActive(true);
         ConnectingPanel.SetActive(false);
+        LobbyPanel.SetActive(false);
 
         PhotonNetwork.AutomaticallySyncScene = true;
     }
@@ -56,6 +61,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         }
     }
 
+    public void OnQuickGameButtonClicked()
+    {
+        PhotonNetwork.JoinRandomRoom();
+    }
+
     #endregion
 
 
@@ -69,7 +79,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         Debug.Log(PhotonNetwork.LocalPlayer.NickName + " is connected to Photon");
-        PhotonNetwork.JoinRandomRoom();
+        ConnectingPanel.SetActive(false);
+        LobbyPanel.SetActive(true);
     }
 
     public override void OnJoinRandomFailed(short returnCode, string message)
@@ -79,7 +90,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        PhotonNetwork.LoadLevel("PlayerMoveTest");
+        PhotonNetwork.LoadLevel("ArenaGreyBox");
     }
 
 
