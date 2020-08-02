@@ -72,11 +72,11 @@ public class PlayerMovement : MonoBehaviour
         {
             if (!fired)
             {
-                chargeValue += Time.deltaTime * 25;
+                chargeValue += Time.deltaTime;
                 charging = true;
             }
 
-            if (chargeValue >= vehicleMaxSpeed)
+            if (chargeValue >= chargeTime)
             {
                 charging = false;
                 fired = true;
@@ -100,7 +100,7 @@ public class PlayerMovement : MonoBehaviour
         {
             currentDirection = transform.forward;
 
-            chargeValue -= Time.deltaTime * chargeTime;
+            chargeValue -= Time.deltaTime / chargeTime;
 
             releasedDirection = Vector3.MoveTowards(releasedDirection, currentDirection, Time.deltaTime * changeDirectionSpeed);
 

@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6131639163082964886}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -635.73, y: 227.955, z: -198.361}
+  m_LocalPosition: {x: -635.73, y: 228, z: -198.361}
   m_LocalScale: {x: 1, y: 0.5, z: 1.5}
   m_Children: []
   m_Father: {fileID: 6326928315702522928}
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cinemachine: {fileID: 8441869056476638669}
   chargeValue: 0
-  chargeTime: 17
+  chargeTime: 1.5
   vehicleMaxSpeed: 15
   rotationSpeed: 200
   changeDirectionSpeed: 2
@@ -142,13 +142,13 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6131639163082964886}
-  m_Material: {fileID: 13400000, guid: eecb29484c5b2ab4b900b27e0cabaec2, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.22410655
-  m_Height: 1.2314587
+  m_Radius: 0.22844791
+  m_Height: 1.1198759
   m_Direction: 2
-  m_Center: {x: 0.010591507, y: 0.2279439, z: -0.031888247}
+  m_Center: {x: 0, y: 0.1938591, z: -0.042642437}
 --- !u!1 &8331316191135114776
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,7 +281,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8441869056476638658}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -648.13696, y: 233.855, z: -210.90038}
+  m_LocalPosition: {x: -648.13696, y: 233.9, z: -210.90038}
   m_LocalScale: {x: 0.3523154, y: 0.5, z: 0.32848632}
   m_Children:
   - {fileID: 8441869056233041895}
