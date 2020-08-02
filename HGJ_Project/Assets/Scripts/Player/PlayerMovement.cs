@@ -123,7 +123,6 @@ public class PlayerMovement : MonoBehaviour
             {
                 if(!isGrounded)
                 {
-
                     Vector3 direction = new Vector3(releasedDirection.x, releasedDirection.y -= Time.deltaTime * 1.5f, releasedDirection.z);
                     rb.velocity = direction * vehicleMaxSpeed;
                 }
