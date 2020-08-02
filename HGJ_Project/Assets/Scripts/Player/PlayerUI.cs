@@ -37,7 +37,7 @@ public class PlayerUI : MonoBehaviour
         if (player.charging)
         {
             gauge.SetActive(true);
-            slider.fillAmount = player.chargeValue / player.maxChargeValue;
+            slider.fillAmount = player.chargeValue / player.vehicleMaxSpeed;
         }
         else
         {
