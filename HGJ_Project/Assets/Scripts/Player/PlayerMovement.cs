@@ -121,8 +121,14 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                Vector3 direction = new Vector3(releasedDirection.x, releasedDirection.y -= Time.deltaTime * 1.5f, releasedDirection.z);
-                rb.velocity = direction * vehicleMaxSpeed;
+                if(!isGrounded)
+                {
+
+                    Vector3 direction = new Vector3(releasedDirection.x, releasedDirection.y -= Time.deltaTime * 1.5f, releasedDirection.z);
+                    rb.velocity = direction * vehicleMaxSpeed;
+                }
+                rb.velocity = releasedDirection * vehicleMaxSpeed;
+
             }
 
         }
