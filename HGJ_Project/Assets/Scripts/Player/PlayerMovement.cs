@@ -18,10 +18,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool fired;
     public bool charging;
-
-    public float xClamp;
-    float yClamp;
-
+    public bool isGrounded;
 
     Rigidbody rb;
 
@@ -29,7 +26,6 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         cinemachine.m_XAxis.m_MaxSpeed = 0;
-
     }
 
     private void Update()
@@ -38,8 +34,18 @@ public class PlayerMovement : MonoBehaviour
         Charging();
         Fire();
 
+
         transform.localRotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, 0);
 
+
+        if (!charging && !fired && chargeValue <= 0 && isGrounded)
+        {
+            rb.isKinematic = true;
+        }
+        else
+        {
+            rb.isKinematic = false;
+        }
 
         rb.AddForce(0, -5, 0);
 
@@ -56,9 +62,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void Charging()
     {
+        if (!isGrounded) return;
         if(Input.GetKey(KeyCode.Space))
         {
-            if(!fired)
+            if (!fired)
             {
                 chargeValue += Time.deltaTime * 25;
                 charging = true;
@@ -115,6 +122,22 @@ public class PlayerMovement : MonoBehaviour
             cinemachine.m_XAxis.m_MaxSpeed = 300;
         else if(Input.GetMouseButtonUp(1))
             cinemachine.m_XAxis.m_MaxSpeed = 0;
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if(other.tag == "Ground")
+        {
+            isGrounded = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.tag == "Ground")
+        {
+            isGrounded = false;
+        }
     }
 
 
