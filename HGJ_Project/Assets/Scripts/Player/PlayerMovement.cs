@@ -40,11 +40,16 @@ public class PlayerMovement : MonoBehaviour
 
         if (!charging && !fired && chargeValue <= 0 && isGrounded)
         {
-            rb.isKinematic = true;
+            rb.velocity = Vector3.zero;
+            rb.constraints = RigidbodyConstraints.FreezeRotationX;
+            rb.constraints = RigidbodyConstraints.FreezeRotationY;
+            rb.constraints = RigidbodyConstraints.FreezeRotationZ;
         }
         else
         {
-            rb.isKinematic = false;
+            rb.constraints = RigidbodyConstraints.None;
+            rb.constraints = RigidbodyConstraints.FreezeRotationY;
+            rb.constraints = RigidbodyConstraints.FreezeRotationZ;
         }
 
         rb.AddForce(0, -5, 0);

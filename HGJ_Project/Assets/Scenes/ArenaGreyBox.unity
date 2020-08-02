@@ -572,6 +572,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 212798598}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &265729662 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6131639163082964880, guid: 66405c8192695994ba23fbe4e0bfe67a,
+    type: 3}
+  m_PrefabInstance: {fileID: 8441869056262327424}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 612b6be8b464ed64da05b2d011aacb3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &289706088
 GameObject:
   m_ObjectHideFlags: 0
@@ -6507,6 +6519,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 265729661, guid: 66405c8192695994ba23fbe4e0bfe67a, type: 3}
+      propertyPath: m_Radius
+      value: 0.22844791
+      objectReference: {fileID: 0}
+    - target: {fileID: 265729661, guid: 66405c8192695994ba23fbe4e0bfe67a, type: 3}
+      propertyPath: m_Height
+      value: 1.1198759
+      objectReference: {fileID: 0}
+    - target: {fileID: 265729661, guid: 66405c8192695994ba23fbe4e0bfe67a, type: 3}
+      propertyPath: m_Center.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 265729661, guid: 66405c8192695994ba23fbe4e0bfe67a, type: 3}
+      propertyPath: m_Center.y
+      value: 0.1938591
+      objectReference: {fileID: 0}
+    - target: {fileID: 265729661, guid: 66405c8192695994ba23fbe4e0bfe67a, type: 3}
+      propertyPath: m_Center.z
+      value: -0.042642437
+      objectReference: {fileID: 0}
+    - target: {fileID: 265729661, guid: 66405c8192695994ba23fbe4e0bfe67a, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6326928315702522928, guid: 66405c8192695994ba23fbe4e0bfe67a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6572,5 +6608,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8441869058324581149, guid: 66405c8192695994ba23fbe4e0bfe67a,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 265729662}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 66405c8192695994ba23fbe4e0bfe67a, type: 3}
