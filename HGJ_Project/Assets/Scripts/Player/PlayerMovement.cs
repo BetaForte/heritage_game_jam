@@ -182,7 +182,7 @@ public class PlayerMovement : MonoBehaviourPun
         {
             if(valueToLerp <= 55)
             {
-                valueToLerp += Time.deltaTime * 5;
+                valueToLerp += Time.deltaTime * 7.5f;
             }
             cinemachine.m_Lens.FieldOfView = valueToLerp;
             hitCollider.enabled = true;
@@ -224,7 +224,7 @@ public class PlayerMovement : MonoBehaviourPun
 
             if (valueToLerp >= 40)
             {
-                valueToLerp -= Time.deltaTime * 5;
+                valueToLerp -= Time.deltaTime * 10;
             }
             cinemachine.m_Lens.FieldOfView = valueToLerp;
             fired = false;
