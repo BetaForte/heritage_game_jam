@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviourPun
     public bool charging;
     public bool isGrounded;
 
-    public float spinTime;
+    [HideInInspector] public float spinTime;
     public bool isHit;
     public BoxCollider hitCollider;
 
