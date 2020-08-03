@@ -8,6 +8,7 @@ TagManager:
   - Ground
   - HitDetector
   - HitCollider
+  - AIHitDetector
   layers:
   - Default
   - TransparentFX

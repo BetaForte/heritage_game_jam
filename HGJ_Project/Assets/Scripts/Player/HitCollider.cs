@@ -12,7 +12,30 @@ public class HitCollider : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "HitDetector")
+        if (other.tag == "AIHitDetector")
+        {
+
+            AIHitDetector hds = other.GetComponent<AIHitDetector>();
+
+            if (other.gameObject.name == "RightHit" || other.gameObject.name == "LeftHit")
+            {
+                Vector3 directions = hds.mainBody.position - mainBody.position;
+                directions.y = 0;
+
+                hds.player.spinTime = spinTimeToInflict;
+                hds.player.isHit = true;
+                hds.rb.AddForce(directions.normalized * knockbackStrength * 1.5f, ForceMode.Impulse);
+            }
+            else
+            {
+                Vector3 direction = hds.mainBody.position - mainBody.position;
+                direction.y = 0;
+
+                hds.rb.AddForce(direction.normalized * knockbackStrength / 1.5f, ForceMode.Impulse);
+            }
+        }
+
+        else if(other.tag == "HitDetector")
         {
             HitDetector hd = other.GetComponent<HitDetector>();
 

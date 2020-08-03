@@ -32,11 +32,6 @@ public class PlayerMovement : MonoBehaviourPun
     public float valueToLerp = 40;
 
 
-    private void Start()
-    {
-        //cinemachine.m_XAxis.m_MaxSpeed = 0;
-    }
-
     private void Update()
     {
 
