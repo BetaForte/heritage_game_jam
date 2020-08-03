@@ -15,6 +15,9 @@ public class PlayerUI : MonoBehaviour
     public GameObject speedMetre;
     public Text speedText;
 
+    [Header("Pause Menu")]
+    public GameObject pauseMenu;
+
     private void Start()
     {
         gauge.SetActive(false);
@@ -30,6 +33,21 @@ public class PlayerUI : MonoBehaviour
         {
             speedText.text = Mathf.Round(player.chargeValue) + " km/h";
         }
+    }
+
+    public void OnPauseButtonClicked()
+    {
+        pauseMenu.SetActive(true);
+    }
+
+    public void OnResumeButtonClicked()
+    {
+        pauseMenu.SetActive(false);
+    }
+
+    public void OnQuitButtonClicked()
+    {
+
     }
 
     private void PlayerCharging()

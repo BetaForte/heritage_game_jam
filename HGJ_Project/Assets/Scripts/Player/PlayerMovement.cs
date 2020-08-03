@@ -6,7 +6,7 @@ using Photon.Pun;
 
 public class PlayerMovement : MonoBehaviourPun
 {
-    public CinemachineFreeLook cinemachine;
+    //public CinemachineFreeLook cinemachine;
     public Rigidbody rb;
 
     public float chargeValue;
@@ -17,47 +17,85 @@ public class PlayerMovement : MonoBehaviourPun
 
     Vector3 releasedDirection;
     Vector3 currentDirection;
+    Vector3 flyDirection;
 
     public bool fired;
     public bool charging;
     public bool isGrounded;
 
+    public float spinTime;
+    public bool isHit;
+    public BoxCollider hitCollider;
+
+    public bool isPlayer2;
+
 
     private void Start()
     {
-        cinemachine.m_XAxis.m_MaxSpeed = 0;
+        //cinemachine.m_XAxis.m_MaxSpeed = 0;
     }
 
     private void Update()
     {
-        LookAround();
-        Charging();
-        Fire();
-        FixPlayerRotation();
+        if(!isHit)
+        {
+            LookAround();
+            Charging();
+            Fire();
+            FixPlayerRotation();
+            RotationInput();
+        }
+
+        if (isHit)
+        {
+            StartCoroutine(DamageSpin(spinTime));
+        }
 
         rb.AddForce(0, -5, 0);
 
+    }
 
-        if (Input.GetKey(KeyCode.D))
+    private IEnumerator DamageSpin(float duration)
+    {
+        transform.Rotate(0, 1000f * Time.deltaTime, 0);
+        yield return new WaitForSeconds(duration);
+        isHit = false;
+    }
+
+    private void RotationInput()
+    {
+        if (!isPlayer2)
         {
-            transform.rotation = Quaternion.Euler(0f, rotationSpeed * Time.deltaTime, 0f) * transform.rotation;
+            if (Input.GetKey(KeyCode.D))
+            {
+                transform.rotation = Quaternion.Euler(0f, rotationSpeed * Time.deltaTime, 0f) * transform.rotation;
+            }
+
+            if (Input.GetKey(KeyCode.A))
+            {
+                transform.rotation = Quaternion.Euler(0f, -rotationSpeed * Time.deltaTime, 0f) * transform.rotation;
+            }
         }
-
-        if (Input.GetKey(KeyCode.A))
+        else if(isPlayer2)
         {
-            transform.rotation = Quaternion.Euler(0f, -rotationSpeed * Time.deltaTime, 0f) * transform.rotation;
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                transform.rotation = Quaternion.Euler(0f, rotationSpeed * Time.deltaTime, 0f) * transform.rotation;
+            }
+
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                transform.rotation = Quaternion.Euler(0f, -rotationSpeed * Time.deltaTime, 0f) * transform.rotation;
+            }
         }
     }
 
-    [PunRPC]
     private void FixPlayerRotation()
     {
-
         if (!charging && !fired && chargeValue <= 0)
         {
             if (isGrounded)
             {
-                rb.velocity = Vector3.zero;
                 rb.constraints = RigidbodyConstraints.FreezeRotationX;
                 rb.constraints = RigidbodyConstraints.FreezeRotationY;
                 rb.constraints = RigidbodyConstraints.FreezeRotationZ;
@@ -77,29 +115,61 @@ public class PlayerMovement : MonoBehaviourPun
     private void Charging()
     {
         if (!isGrounded) return;
-        if(Input.GetKey(KeyCode.Space))
+
+        if(isPlayer2)
         {
-            if (!fired)
+            if (Input.GetKey(KeyCode.M))
             {
-                chargeValue += Time.deltaTime;
-                charging = true;
+                if (!fired)
+                {
+                    chargeValue += Time.deltaTime;
+                    charging = true;
+                }
+
+                if (chargeValue >= chargeTime)
+                {
+                    charging = false;
+                    fired = true;
+                    releasedDirection = transform.forward;
+                    rb.velocity = transform.forward * chargeValue;
+                }
+
             }
 
-            if (chargeValue >= chargeTime)
+            if (Input.GetKeyUp(KeyCode.M))
             {
+                releasedDirection = transform.forward;
                 charging = false;
                 fired = true;
-                releasedDirection = transform.forward;
-                rb.velocity = transform.forward * chargeValue;
             }
-
         }
 
-        if(Input.GetKeyUp(KeyCode.Space))
+        else if(!isPlayer2)
         {
-            releasedDirection = transform.forward;
-            charging = false;
-            fired = true;
+            if (Input.GetKey(KeyCode.Space))
+            {
+                if (!fired)
+                {
+                    chargeValue += Time.deltaTime;
+                    charging = true;
+                }
+
+                if (chargeValue >= chargeTime)
+                {
+                    charging = false;
+                    fired = true;
+                    releasedDirection = transform.forward;
+                    rb.velocity = transform.forward * chargeValue;
+                }
+
+            }
+
+            if (Input.GetKeyUp(KeyCode.Space))
+            {
+                releasedDirection = transform.forward;
+                charging = false;
+                fired = true;
+            }
         }
     }
 
@@ -107,13 +177,16 @@ public class PlayerMovement : MonoBehaviourPun
     {
         if (fired)
         {
+            hitCollider.enabled = true;
             currentDirection = transform.forward;
 
             chargeValue -= Time.deltaTime / chargeTime;
 
+            releasedDirection = Vector3.MoveTowards(releasedDirection, currentDirection, Time.deltaTime * changeDirectionSpeed);
+
             if(isGrounded)
             {
-                releasedDirection = Vector3.MoveTowards(releasedDirection, currentDirection, Time.deltaTime * changeDirectionSpeed);
+                flyDirection = transform.forward;
             }
 
             if (chargeValue <= 0)
@@ -124,10 +197,15 @@ public class PlayerMovement : MonoBehaviourPun
             {
                 if(!isGrounded)
                 {
-                    Vector3 direction = new Vector3(releasedDirection.x, releasedDirection.y -= Time.deltaTime * 1.5f, releasedDirection.z);
+                    Vector3 direction = new Vector3(flyDirection.x, flyDirection.y -= Time.deltaTime * 1.5f, flyDirection.z);
                     rb.velocity = direction * vehicleMaxSpeed;
                 }
-                rb.velocity = releasedDirection * vehicleMaxSpeed;
+                if (isGrounded)
+                {
+                    rb.velocity = releasedDirection * vehicleMaxSpeed;
+                    Quaternion finalRotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, 0);
+                    transform.localRotation = Quaternion.Slerp(transform.rotation, finalRotation, Time.deltaTime * 5);
+                }
 
             }
 
@@ -136,15 +214,16 @@ public class PlayerMovement : MonoBehaviourPun
         if(chargeValue <= 0)
         {
             fired = false;
+            hitCollider.enabled = false;
         }
     }
 
     private void LookAround()
     {
-        if(!fired && Input.GetMouseButton(1))
-            cinemachine.m_XAxis.m_MaxSpeed = 300;
-        else if(Input.GetMouseButtonUp(1))
-            cinemachine.m_XAxis.m_MaxSpeed = 0;
+        //if(!fired && Input.GetMouseButton(1))
+        //    cinemachine.m_XAxis.m_MaxSpeed = 300;
+        //else if(Input.GetMouseButtonUp(1))
+        //    cinemachine.m_XAxis.m_MaxSpeed = 0;
     }
 
     private void OnTriggerStay(Collider other)
