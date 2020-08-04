@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
-using Photon.Pun;
+using UnityEngine.Rendering.PostProcessing;
 
-public class PlayerMovement : MonoBehaviourPun
+public class PlayerMovement : MonoBehaviour
 {
     public CinemachineFreeLook cinemachine;
     public Rigidbody rb;
+    public PostProcessVolume postProcessing;
 
     public float chargeValue;
     public float chargeTime;
@@ -31,10 +32,8 @@ public class PlayerMovement : MonoBehaviourPun
 
     public float valueToLerp = 40;
 
-
     private void Update()
     {
-
         if(!isHit)
         {
             LookAround();
@@ -175,11 +174,8 @@ public class PlayerMovement : MonoBehaviourPun
     {
         if (fired)
         {
-            if(valueToLerp <= 55)
-            {
-                valueToLerp += Time.deltaTime * 7.5f;
-            }
-            cinemachine.m_Lens.FieldOfView = valueToLerp;
+            AddFiringEffects();
+
             hitCollider.enabled = true;
             currentDirection = transform.forward;
 
@@ -187,7 +183,7 @@ public class PlayerMovement : MonoBehaviourPun
 
             releasedDirection = Vector3.MoveTowards(releasedDirection, currentDirection, Time.deltaTime * changeDirectionSpeed);
 
-            if(isGrounded)
+            if (isGrounded)
             {
                 flyDirection = transform.forward;
             }
@@ -198,7 +194,7 @@ public class PlayerMovement : MonoBehaviourPun
             }
             else
             {
-                if(!isGrounded)
+                if (!isGrounded)
                 {
                     Vector3 direction = new Vector3(flyDirection.x, flyDirection.y -= Time.deltaTime * 1.5f, flyDirection.z);
                     rb.velocity = direction * vehicleMaxSpeed;
@@ -214,17 +210,41 @@ public class PlayerMovement : MonoBehaviourPun
 
         }
 
-        if(chargeValue <= 0)
+        if (chargeValue <= 0)
         {
-
-            if (valueToLerp >= 40)
-            {
-                valueToLerp -= Time.deltaTime * 10;
-            }
-            cinemachine.m_Lens.FieldOfView = valueToLerp;
+            RemoveFiringEffects();
             fired = false;
             hitCollider.enabled = false;
         }
+    }
+
+    private void AddFiringEffects()
+    {
+        if (cinemachine.m_Lens.FieldOfView <= 45)
+            cinemachine.m_Lens.FieldOfView += Time.deltaTime * 5f;
+
+        LensDistortion lensDistortion;
+        postProcessing.profile.TryGetSettings(out lensDistortion);
+        lensDistortion.intensity.value = 35f;
+
+        ChromaticAberration chromaticAberration;
+        postProcessing.profile.TryGetSettings(out chromaticAberration);
+        chromaticAberration.intensity.value = 1f;
+
+    }
+
+    private void RemoveFiringEffects()
+    {
+        if (cinemachine.m_Lens.FieldOfView >= 40)
+            cinemachine.m_Lens.FieldOfView -= Time.deltaTime * 5;
+
+        LensDistortion lensDistortion;
+        postProcessing.profile.TryGetSettings(out lensDistortion);
+        lensDistortion.intensity.value = 20f;
+
+        ChromaticAberration chromaticAberration;
+        postProcessing.profile.TryGetSettings(out chromaticAberration);
+        chromaticAberration.intensity.value = 0f;
     }
 
     private void LookAround()

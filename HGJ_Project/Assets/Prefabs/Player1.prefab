@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 152765434}
-  m_LocalRotation: {x: 0.12898964, y: 0.0060688574, z: -0.0007894293, w: 0.9916271}
+  m_LocalRotation: {x: 0.12595795, y: 0.21381433, z: -0.027812703, w: 0.9683205}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -99,7 +99,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 324248397}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -631.48694, y: 233.75206, z: -209.66646}
+  m_LocalPosition: {x: -631.43195, y: 233.75206, z: -215.02956}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1458926256}
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_YAxis:
     Value: 0.5
     m_SpeedMode: 0
-    m_MaxSpeed: 2
+    m_MaxSpeed: 0
     m_AccelTime: 0.2
     m_DecelTime: 0.1
     m_InputAxisName: Mouse Y
@@ -485,7 +485,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1458926255}
-  m_LocalRotation: {x: 0.1649253, y: 0.0060362006, z: -0.0010093637, w: 0.9862871}
+  m_LocalRotation: {x: 0.16104898, y: 0.21266295, z: -0.035561144, w: 0.963106}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -559,7 +559,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1718884013}
-  m_LocalRotation: {x: 0.14695796, y: 0.006053545, z: -0.00089939864, w: 0.9891238}
+  m_LocalRotation: {x: 0.14350393, y: 0.21327457, z: -0.031687032, w: 0.96587604}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -735,6 +735,68 @@ MonoBehaviour:
   m_BiasX: 0
   m_BiasY: 0
   m_CenterOnActivate: 1
+--- !u!1 &2079994379
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2079994380}
+  - component: {fileID: 2079994382}
+  - component: {fileID: 2079994381}
+  m_Layer: 10
+  m_Name: Effect
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2079994380
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2079994379}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 2, z: 0.6666667}
+  m_Children: []
+  m_Father: {fileID: 396120918481548193}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2079994382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2079994379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: b554b32e6b5063b4fbb2ae3870de824b, type: 2}
+  isGlobal: 0
+  blendDistance: 5
+  weight: 1
+  priority: 0
+--- !u!65 &2079994381
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2079994379}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 9.576208, y: 6.3506584, z: 7.773754}
+  m_Center: {x: 1.2702646, y: 2.6753292, z: -3.386877}
 --- !u!1 &396120918481548194
 GameObject:
   m_ObjectHideFlags: 0
@@ -765,13 +827,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 396120918481548194}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -631.35, y: 229.90205, z: -198.4773}
+  m_LocalPosition: {x: -626.72, y: 229.90205, z: -204.88}
   m_LocalScale: {x: 1, y: 0.5, z: 1.5}
   m_Children:
   - {fileID: 7801108225556950890}
   - {fileID: 7801108224573051257}
   - {fileID: 7801108226059369089}
   - {fileID: 7801108225273509901}
+  - {fileID: 2079994380}
   m_Father: {fileID: 550982304287193092}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -834,7 +897,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 612b6be8b464ed64da05b2d011aacb3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cinemachine: {fileID: 324248399}
   rb: {fileID: 396120918481548197}
+  postProcessing: {fileID: 0}
   chargeValue: 0
   chargeTime: 1.5
   vehicleMaxSpeed: 15
@@ -843,8 +908,15 @@ MonoBehaviour:
   fired: 0
   charging: 0
   isGrounded: 0
+  spinTime: 0
   isHit: 0
+  hitCollider: {fileID: 7801108225556950888}
   isPlayer2: 0
+  valueToLerp: 40
+  postValue: 20
+  postLerp:
+    overrideState: 0
+    value: 20
 --- !u!54 &396120918481548197
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1880,8 +1952,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.2287631, y: 1, z: 0.81110084}
-  m_Center: {x: 0.66780543, y: 0, z: -0.22810213}
+  m_Size: {x: 0.2287631, y: 1, z: 0.6522376}
+  m_Center: {x: 0.66780543, y: 0, z: -0.086107574}
 --- !u!114 &7801108224573051262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2286,8 +2358,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.4424162, y: 1, z: 0.22641215}
-  m_Center: {x: 0.02034998, y: 0, z: 0.84898615}
+  m_Size: {x: 0.7431226, y: 1, z: 0.22641215}
+  m_Center: {x: 0.021411657, y: 0, z: 0.84898615}
 --- !u!114 &7801108225556950891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2300,7 +2372,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c1db3a3ad32e3145b986d750f1c5ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockbackStrength: 10
+  knockbackStrength: 7.5
+  spinTimeToInflict: 1
   mainBody: {fileID: 396120918481548193}
 --- !u!1 &7801108225647170712
 GameObject:
@@ -2421,8 +2494,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.24253559, y: 1, z: 0.6187334}
-  m_Center: {x: -0.64164686, y: 0, z: -0.1906333}
+  m_Size: {x: 0.24253559, y: 1, z: 0.51329297}
+  m_Center: {x: -0.64164686, y: 0, z: -0.06392099}
 --- !u!114 &7801108226059369094
 MonoBehaviour:
   m_ObjectHideFlags: 0
