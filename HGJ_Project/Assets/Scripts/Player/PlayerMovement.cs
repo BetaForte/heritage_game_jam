@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     public CinemachineFreeLook cinemachine;
     public Rigidbody rb;
     public PostProcessVolume postProcessing;
+    public BoxCollider[] bcArray;
 
     public float chargeValue;
     public float chargeTime;
@@ -41,17 +42,29 @@ public class PlayerMovement : MonoBehaviour
         arenaGM = FindObjectOfType<ArenaGameManager>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        if (!arenaGM.hasRoundStart) return;
-
-        if(!isHit)
+        if (!isHit)
         {
             LookAround();
-            Charging();
             Fire();
             FixPlayerRotation();
             RotationInput();
+        }
+    }
+
+    private void Update()
+    {
+        if (!arenaGM.hasRoundStart || arenaGM.isRoundOver) return;
+
+        if(transform.position.y > 230)
+        {
+            isGrounded = false;
+        }
+
+        if(!isHit)
+        {
+            Charging();
         }
 
         if (isHit)
@@ -190,13 +203,13 @@ public class PlayerMovement : MonoBehaviour
             hitCollider.enabled = true;
             currentDirection = transform.forward;
 
-            chargeValue -= Time.deltaTime / chargeTime;
 
             releasedDirection = Vector3.MoveTowards(releasedDirection, currentDirection, Time.deltaTime * changeDirectionSpeed);
 
             if (isGrounded)
             {
                 flyDirection = transform.forward;
+                chargeValue -= Time.deltaTime / chargeTime;
             }
 
             if (chargeValue <= 0 && isGrounded)
@@ -266,17 +279,31 @@ public class PlayerMovement : MonoBehaviour
         //    cinemachine.m_XAxis.m_MaxSpeed = 0;
     }
 
+    private void Die()
+    {
+        for(int i = 0; i < bcArray.Length; i++)
+        {
+            bcArray[i].enabled = false;
+        }
+        GetComponent<MeshRenderer>().enabled = false;
+        cinemachine.enabled = false;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Deadzone")
         {
-            GameObject killer = scoreScript.lastVehicleInContact;
-            Score killerScore = killer.GetComponent<Score>();
+            if(scoreScript.lastVehicleInContact != null)
+            {
+                GameObject killer = scoreScript.lastVehicleInContact;
+                Score killerScore = killer.GetComponent<Score>();
 
-            killerScore.lastVehicleInContact = null;
-            killerScore.score++;
-            
-            Destroy(gameObject);
+                Die();
+
+                killerScore.lastVehicleInContact = null;
+                killerScore.score++;
+            }
+
         }
     }
 
@@ -285,6 +312,11 @@ public class PlayerMovement : MonoBehaviour
         if(other.tag == "Ground")
         {
             isGrounded = true;
+        }
+
+        if(other.tag != "Ground")
+        {
+            isGrounded = false;
         }
     }
 
