@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1047200424287360187}
   - component: {fileID: 1047200424287360186}
   - component: {fileID: 1047200424287360185}
+  - component: {fileID: 4985499234844023366}
   - component: {fileID: 1047200424287360184}
   - component: {fileID: 5112917162832742019}
   - component: {fileID: 6602156554725694804}
@@ -116,10 +117,18 @@ MonoBehaviour:
   hitCollider: {fileID: 7472650757819469482}
   isPlayer2: 1
   valueToLerp: 40
-  postValue: 20
-  postLerp:
-    overrideState: 0
-    value: 20
+--- !u!114 &4985499234844023366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1047200424287360191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cd9d69cf97d8fa419d02c5c8a53bbc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!54 &1047200424287360184
 Rigidbody:
   m_ObjectHideFlags: 0

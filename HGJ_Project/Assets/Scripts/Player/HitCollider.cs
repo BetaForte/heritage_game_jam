@@ -24,14 +24,14 @@ public class HitCollider : MonoBehaviour
 
                 hds.player.spinTime = spinTimeToInflict;
                 hds.player.isHit = true;
-                hds.rb.AddForce(directions.normalized * knockbackStrength * 1.5f, ForceMode.Impulse);
+                hds.rb.AddForce(directions.normalized * knockbackStrength * 3f, ForceMode.Impulse);
             }
             else
             {
                 Vector3 direction = hds.mainBody.position - mainBody.position;
                 direction.y = 0;
 
-                hds.rb.AddForce(direction.normalized * knockbackStrength / 1.5f, ForceMode.Impulse);
+                hds.rb.AddForce(direction.normalized * knockbackStrength, ForceMode.Impulse);
             }
         }
 
@@ -46,14 +46,14 @@ public class HitCollider : MonoBehaviour
 
                 hd.player.spinTime = spinTimeToInflict;
                 hd.player.isHit = true;
-                hd.rb.AddForce(directions.normalized * knockbackStrength * 1.5f, ForceMode.Impulse);
+                hd.rb.AddForce(directions.normalized * knockbackStrength * 3f, ForceMode.Impulse);
             }
             else
             {
                 Vector3 direction = hd.mainBody.position - mainBody.position;
                 direction.y = 0;
 
-                hd.rb.AddForce(direction.normalized * knockbackStrength / 1.5f, ForceMode.Impulse);
+                hd.rb.AddForce(direction.normalized * knockbackStrength, ForceMode.Impulse);
             }
         }
 
