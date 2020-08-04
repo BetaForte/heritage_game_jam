@@ -1,35 +1,61 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
-using Photon.Realtime;
+using UnityEngine.UI;
 
-public class ArenaGameManager : MonoBehaviourPunCallbacks
+public class ArenaGameManager : MonoBehaviour
 {
-    public GameObject[] playerPrefabs;
-    public Transform spawnPosition;
+    public float startRoundTimer;
+    public float roundDurationTimer;
+
+    public Score player1;
+    public Score player2;
+    public Score AI1;
+    public Score AI2;
+
+    public bool hasRoundStart;
+
+    [Header("Round Start Panel")]
+    public GameObject roundStartPanel;
+    public Text roundStartTimerText;
+    public Text roundStartTimerText2;
 
     private void Start()
     {
-        if (PhotonNetwork.IsConnectedAndReady)
+        if(!hasRoundStart)
+        roundStartPanel.SetActive(true);
+    }
+
+    private void Update()
+    {
+        if(!hasRoundStart)
         {
-            GameObject player = PhotonNetwork.Instantiate(playerPrefabs[0].name, spawnPosition.position, Quaternion.identity);
-
-            Transform playerBody = player.transform.Find("Player");
-
-            playerBody.transform.position = spawnPosition.position;
-
+            startRoundTimer -= Time.deltaTime;
+            roundStartTimerText.text = "Round Starts In: " + Mathf.Round(startRoundTimer);
+            roundStartTimerText2.text = "Round Starts In: " + Mathf.Round(startRoundTimer);
+            if(startRoundTimer <= 0.5f)
+            {
+                StartCoroutine(RoundGo());
+            }
         }
+
+        if(hasRoundStart)
+        {
+            roundDurationTimer -= Time.deltaTime;
+        }
+
+
     }
 
-    public override void OnJoinedRoom()
+    private IEnumerator RoundGo()
     {
-        Debug.Log(PhotonNetwork.NickName + " has joined");
+        roundStartTimerText.text = "GO!";
+        roundStartTimerText2.text = "GO!";
+        yield return new WaitForSeconds(1f);
+
+        hasRoundStart = true;
+        roundStartPanel.SetActive(false);
     }
 
-    public override void OnPlayerEnteredRoom(Player newPlayer)
-    {
-        Debug.Log(newPlayer.NickName + " has joined");
-    }
 
 }

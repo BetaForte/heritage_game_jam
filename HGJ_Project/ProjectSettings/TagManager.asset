@@ -9,6 +9,10 @@ TagManager:
   - HitDetector
   - HitCollider
   - AIHitDetector
+  - Deadzone
+  - Player1
+  - Player2
+  - Vehicle
   layers:
   - Default
   - TransparentFX

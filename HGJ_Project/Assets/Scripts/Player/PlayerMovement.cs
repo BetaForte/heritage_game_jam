@@ -29,11 +29,22 @@ public class PlayerMovement : MonoBehaviour
     public BoxCollider hitCollider;
 
     public bool isPlayer2;
-
     public float valueToLerp = 40;
+
+    Score scoreScript;
+
+    ArenaGameManager arenaGM;
+
+    private void Awake()
+    {
+        scoreScript = GetComponent<Score>();
+        arenaGM = FindObjectOfType<ArenaGameManager>();
+    }
 
     private void Update()
     {
+        if (!arenaGM.hasRoundStart) return;
+
         if(!isHit)
         {
             LookAround();
@@ -221,11 +232,11 @@ public class PlayerMovement : MonoBehaviour
     private void AddFiringEffects()
     {
         if (cinemachine.m_Lens.FieldOfView <= 45)
-            cinemachine.m_Lens.FieldOfView += Time.deltaTime * 5f;
+            cinemachine.m_Lens.FieldOfView += Time.deltaTime * 2f;
 
         LensDistortion lensDistortion;
         postProcessing.profile.TryGetSettings(out lensDistortion);
-        lensDistortion.intensity.value = 35f;
+        lensDistortion.intensity.value = 50f;
 
         ChromaticAberration chromaticAberration;
         postProcessing.profile.TryGetSettings(out chromaticAberration);
@@ -253,6 +264,20 @@ public class PlayerMovement : MonoBehaviour
         //    cinemachine.m_XAxis.m_MaxSpeed = 300;
         //else if(Input.GetMouseButtonUp(1))
         //    cinemachine.m_XAxis.m_MaxSpeed = 0;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Deadzone")
+        {
+            GameObject killer = scoreScript.lastVehicleInContact;
+            Score killerScore = killer.GetComponent<Score>();
+
+            killerScore.lastVehicleInContact = null;
+            killerScore.score++;
+            
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerStay(Collider other)
