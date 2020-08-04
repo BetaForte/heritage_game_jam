@@ -6,7 +6,7 @@ using Photon.Pun;
 
 public class PlayerMovement : MonoBehaviourPun
 {
-    //public CinemachineFreeLook cinemachine;
+    public CinemachineFreeLook cinemachine;
     public Rigidbody rb;
 
     public float chargeValue;
@@ -29,14 +29,12 @@ public class PlayerMovement : MonoBehaviourPun
 
     public bool isPlayer2;
 
+    public float valueToLerp = 40;
 
-    private void Start()
-    {
-        //cinemachine.m_XAxis.m_MaxSpeed = 0;
-    }
 
     private void Update()
     {
+
         if(!isHit)
         {
             LookAround();
@@ -177,6 +175,11 @@ public class PlayerMovement : MonoBehaviourPun
     {
         if (fired)
         {
+            if(valueToLerp <= 55)
+            {
+                valueToLerp += Time.deltaTime * 7.5f;
+            }
+            cinemachine.m_Lens.FieldOfView = valueToLerp;
             hitCollider.enabled = true;
             currentDirection = transform.forward;
 
@@ -213,6 +216,12 @@ public class PlayerMovement : MonoBehaviourPun
 
         if(chargeValue <= 0)
         {
+
+            if (valueToLerp >= 40)
+            {
+                valueToLerp -= Time.deltaTime * 10;
+            }
+            cinemachine.m_Lens.FieldOfView = valueToLerp;
             fired = false;
             hitCollider.enabled = false;
         }
