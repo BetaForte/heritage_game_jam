@@ -199,7 +199,7 @@ public class PlayerMovement : MonoBehaviour
                 flyDirection = transform.forward;
             }
 
-            if (chargeValue <= 0)
+            if (chargeValue <= 0 && isGrounded)
             {
                 rb.velocity = Vector3.zero;
             }
