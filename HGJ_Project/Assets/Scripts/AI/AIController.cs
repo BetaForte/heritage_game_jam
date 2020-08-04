@@ -11,7 +11,8 @@ public class AIController : MonoBehaviour
     public float rotationSpeed = 10.0f;
     public float changeDirectionSpeed;
 
-    Vector3 releasedDirection;
+    [HideInInspector]
+    public Vector3 releasedDirection;
     Vector3 currentDirection;
 
     public bool fired;
@@ -65,7 +66,7 @@ public class AIController : MonoBehaviour
         //END
 
     }
-    private void Charge(float m_chargeValue)
+    public void Charge(float m_chargeValue)
     {
         if (!isGrounded)
         {
@@ -78,7 +79,7 @@ public class AIController : MonoBehaviour
         fired = true;
     }
 
-    private void Steer(float angle)
+    public void Steer(float angle)
     {
         float newAngle = Mathf.MoveTowards(transform.eulerAngles.y, angle, Time.deltaTime * rotationSpeed);
         transform.rotation = Quaternion.Euler(transform.eulerAngles.x, newAngle, 0);
