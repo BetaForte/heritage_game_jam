@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MenuTransitionBasic : MonoBehaviour
 {
@@ -45,5 +46,10 @@ public class MenuTransitionBasic : MonoBehaviour
             customPages[page].SetActive(true);
             gameObject.SetActive(false);
         }
+    }
+
+    public void OnStartButtonClicked()
+    {
+        SceneManager.LoadScene(1);
     }
 }

@@ -6,9 +6,11 @@ using UnityEngine.Rendering.PostProcessing;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public Player player;
     public CinemachineFreeLook cinemachine;
     public Rigidbody rb;
     public PostProcessVolume postProcessing;
+    public BoxCollider[] bcArray;
 
     public float chargeValue;
     public float chargeTime;
@@ -31,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
     public bool isPlayer2;
     public float valueToLerp = 40;
 
+    public HitCollider hc;
     Score scoreScript;
 
     ArenaGameManager arenaGM;
@@ -39,16 +42,42 @@ public class PlayerMovement : MonoBehaviour
     {
         scoreScript = GetComponent<Score>();
         arenaGM = FindObjectOfType<ArenaGameManager>();
+
+
+    }
+
+    private void Start()
+    {
+        for (int i = 0; i < ArenaSettings.instance.vehicleTypes.Count; i++)
+        {
+            switch (player)
+            {
+                case Player.Player1:
+                    if (ArenaSettings.instance.vehicleTypes[i].vehicleTypeName == ArenaSettings.instance.player1Vehicle)
+                    {
+                        chargeTime = ArenaSettings.instance.vehicleTypes[i].chargeTime;
+                        vehicleMaxSpeed = ArenaSettings.instance.vehicleTypes[i].vehicleMaxSpeed;
+                        hc.knockbackStrength = ArenaSettings.instance.vehicleTypes[i].knockbackStrength;
+                        GetComponent<MeshRenderer>().material = ArenaSettings.instance.vehicleTypes[i].vehicleMaterial;
+                    }
+                    break;
+            }
+        }
     }
 
     private void Update()
     {
-        if (!arenaGM.hasRoundStart) return;
+        if (!arenaGM.hasRoundStart || arenaGM.isRoundOver) return;
+
+        if(transform.position.y > 230)
+        {
+            isGrounded = false;
+        }
 
         if(!isHit)
         {
-            LookAround();
             Charging();
+            LookAround();
             Fire();
             FixPlayerRotation();
             RotationInput();
@@ -112,6 +141,7 @@ public class PlayerMovement : MonoBehaviour
             Quaternion finalRotation = Quaternion.Euler(0, transform.eulerAngles.y, 0);
             transform.localRotation = Quaternion.Slerp(transform.rotation, finalRotation, Time.deltaTime * 5);
         }
+
         else
         {
             rb.constraints = RigidbodyConstraints.None;
@@ -190,16 +220,17 @@ public class PlayerMovement : MonoBehaviour
             hitCollider.enabled = true;
             currentDirection = transform.forward;
 
-            chargeValue -= Time.deltaTime / chargeTime;
 
             releasedDirection = Vector3.MoveTowards(releasedDirection, currentDirection, Time.deltaTime * changeDirectionSpeed);
+
+            chargeValue -= Time.deltaTime / chargeTime;
 
             if (isGrounded)
             {
                 flyDirection = transform.forward;
             }
 
-            if (chargeValue <= 0)
+            if (chargeValue <= 0 && isGrounded)
             {
                 rb.velocity = Vector3.zero;
             }
@@ -212,9 +243,7 @@ public class PlayerMovement : MonoBehaviour
                 }
                 if (isGrounded)
                 {
-                    rb.velocity = releasedDirection * vehicleMaxSpeed;
-                    Quaternion finalRotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, 0);
-                    transform.localRotation = Quaternion.Slerp(transform.rotation, finalRotation, Time.deltaTime * 5);
+                    rb.velocity = new Vector3(releasedDirection.x * vehicleMaxSpeed, releasedDirection.y*vehicleMaxSpeed, releasedDirection.z * vehicleMaxSpeed);
                 }
 
             }
@@ -266,17 +295,31 @@ public class PlayerMovement : MonoBehaviour
         //    cinemachine.m_XAxis.m_MaxSpeed = 0;
     }
 
+    private void Die()
+    {
+        for(int i = 0; i < bcArray.Length; i++)
+        {
+            bcArray[i].enabled = false;
+        }
+        GetComponent<MeshRenderer>().enabled = false;
+        cinemachine.enabled = false;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Deadzone")
         {
-            GameObject killer = scoreScript.lastVehicleInContact;
-            Score killerScore = killer.GetComponent<Score>();
+            if(scoreScript.lastVehicleInContact != null)
+            {
+                GameObject killer = scoreScript.lastVehicleInContact;
+                Score killerScore = killer.GetComponent<Score>();
 
-            killerScore.lastVehicleInContact = null;
-            killerScore.score++;
-            
-            Destroy(gameObject);
+                Die();
+
+                killerScore.lastVehicleInContact = null;
+                killerScore.score++;
+            }
+
         }
     }
 
@@ -285,6 +328,11 @@ public class PlayerMovement : MonoBehaviour
         if(other.tag == "Ground")
         {
             isGrounded = true;
+        }
+
+        if(other.tag != "Ground")
+        {
+            isGrounded = false;
         }
     }
 

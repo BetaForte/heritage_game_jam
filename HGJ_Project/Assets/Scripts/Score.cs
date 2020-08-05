@@ -20,7 +20,7 @@ public class Score : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Vehicle")
+        if(other.tag == "Player")
         {
             lastVehicleInContact = other.gameObject;
 
