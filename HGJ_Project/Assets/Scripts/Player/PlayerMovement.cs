@@ -25,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
     public bool fired;
     public bool charging;
     public bool isGrounded;
+    public bool isDead;
 
     [HideInInspector] public float spinTime;
     public bool isHit;
@@ -313,6 +314,17 @@ public class PlayerMovement : MonoBehaviour
         }
         GetComponent<MeshRenderer>().enabled = false;
         cinemachine.enabled = false;
+        isDead = true;
+    }
+
+    public void Respawn()
+    {
+        for (int i = 0; i < bcArray.Length; i++)
+        {
+            bcArray[i].enabled = true;
+        }
+        GetComponent<MeshRenderer>().enabled = true;
+        cinemachine.enabled = true;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -324,11 +336,11 @@ public class PlayerMovement : MonoBehaviour
                 GameObject killer = scoreScript.lastVehicleInContact;
                 Score killerScore = killer.GetComponent<Score>();
 
-                Die();
-
                 killerScore.lastVehicleInContact = null;
                 killerScore.score++;
             }
+
+            Die();
 
         }
     }
