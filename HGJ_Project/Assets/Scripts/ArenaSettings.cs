@@ -36,6 +36,7 @@ public class ArenaSettings : MonoBehaviour
 public class VehicleType
 {
     public string vehicleTypeName;
+    public Mesh meshRender;
     public Material vehicleMaterial;
     public float chargeTime;
     public float vehicleMaxSpeed;

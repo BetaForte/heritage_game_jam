@@ -65,6 +65,7 @@ public class PlayerMovement : MonoBehaviour
                         vehicleMaxSpeed = ArenaSettings.instance.vehicleTypes[i].vehicleMaxSpeed;
                         hc.knockbackStrength = ArenaSettings.instance.vehicleTypes[i].knockbackStrength;
                         GetComponent<MeshRenderer>().material = ArenaSettings.instance.vehicleTypes[i].vehicleMaterial;
+                        GetComponent<MeshFilter>().mesh = ArenaSettings.instance.vehicleTypes[i].meshRender;
                     }
                     break;
 
@@ -75,6 +76,7 @@ public class PlayerMovement : MonoBehaviour
                         vehicleMaxSpeed = ArenaSettings.instance.vehicleTypes[i].vehicleMaxSpeed;
                         hc.knockbackStrength = ArenaSettings.instance.vehicleTypes[i].knockbackStrength;
                         GetComponent<MeshRenderer>().material = ArenaSettings.instance.vehicleTypes[i].vehicleMaterial;
+                        GetComponent<MeshFilter>().mesh = ArenaSettings.instance.vehicleTypes[i].meshRender;
                     }
                     break;
             }

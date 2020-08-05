@@ -14575,6 +14575,18 @@ PrefabInstance:
       propertyPath: roundTime
       value: 40
       objectReference: {fileID: 0}
+    - target: {fileID: 6498950937838602464, guid: 9c8849ff05fa6d44ba78850790f5a64d,
+        type: 3}
+      propertyPath: vehicleTypes.Array.data[0].meshRender
+      value: 
+      objectReference: {fileID: 4298779393402551167, guid: b06b4a65839b2c743bd56035fa160fe9,
+        type: 3}
+    - target: {fileID: 6498950937838602464, guid: 9c8849ff05fa6d44ba78850790f5a64d,
+        type: 3}
+      propertyPath: vehicleTypes.Array.data[1].meshRender
+      value: 
+      objectReference: {fileID: 4298779393402551167, guid: b06b4a65839b2c743bd56035fa160fe9,
+        type: 3}
     - target: {fileID: 6498950937838602465, guid: 9c8849ff05fa6d44ba78850790f5a64d,
         type: 3}
       propertyPath: m_Name

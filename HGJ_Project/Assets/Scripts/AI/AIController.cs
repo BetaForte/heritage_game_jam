@@ -30,6 +30,17 @@ public class AIController : MonoBehaviour
     float angleToRotate;
 
     Score scoreScript;
+    ArenaGameManager2Player arenaGM;
+    ArenaGameManager1Player arenaGM1;
+
+    private void Awake()
+    {
+        arenaGM = FindObjectOfType<ArenaGameManager2Player>();
+        if (arenaGM == null)
+        {
+            arenaGM1 = FindObjectOfType<ArenaGameManager1Player>();
+        }
+    }
 
     private void Start()
     {
@@ -39,37 +50,17 @@ public class AIController : MonoBehaviour
 
     private void Update()
     {
+        if (arenaGM == null)
+        {
+            if (!arenaGM1.hasRoundStart || arenaGM1.isRoundOver) return;
+        }
+        if (arenaGM != null)
+        {
+            if (!arenaGM.hasRoundStart || arenaGM.isRoundOver) return;
+        }
         MovementUpdate();
         FixPlayerRotation();
         LogicUpdate();
-
-        // START
-
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            //set released direction before using charge to move in a direction
-            releasedDirection = transform.forward;
-
-            //run the Charge function the float value in the parameter is how many seconds should the 
-            //enemy move in that direction which is transform.forward
-            //if you want to change direction set the steer first
-            Charge(1f);
-        }
-
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            //set the angle to rotate and set rotate to true
-            angleToRotate = 20;
-            rotate = true;
-        }
-
-        if(rotate)
-        {
-            //run the steer function if rotate is true (make sure to set the angleToRotate first.
-            Steer(angleToRotate);
-        }
-
-        //END
 
     }
     public void Charge(float m_chargeValue)
