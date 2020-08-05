@@ -28,6 +28,7 @@ public class AIBasic : MonoBehaviour
     Vector3 targetPosition;
     float chargeLifeTime;
     float restTimer;
+    bool targetingPlayer;
 
     // Start is called before the first frame update
     void Start()
@@ -103,6 +104,9 @@ public class AIBasic : MonoBehaviour
             AIController newAI = enemy.GetComponent<AIController>();
             PlayerMovement newPlayer = enemy.GetComponent<PlayerMovement>();
 
+            if (enemy.transform.position.y < 8)
+                continue;
+
             if(newAI)
             {
                 if (newAI.isGrounded || newAI.transform.position.y > transform.position.y)
@@ -134,9 +138,15 @@ public class AIBasic : MonoBehaviour
         targetPosition = Vector3.zero;
 
         if (Vector3.Distance(targetEnemy.transform.position, transform.position) < 10)
+        {
             targetPosition = targetEnemy.transform.position;
+            targetingPlayer = true;
+        }
         else
+        {
             targetPosition = nextNode.transform.position;
+            targetingPlayer = false;
+        }
         
         Vector3 originalRot = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z);
         transform.LookAt(targetPosition);
@@ -156,11 +166,11 @@ public class AIBasic : MonoBehaviour
         {
             currentState = "ChargeState";
             aiCon.releasedDirection = transform.forward;
-            float chargePower = Vector3.Distance(targetPosition, transform.position) / 10.0f * 0.05f;
-            //Debug.Log(chargePower);
+            float chargePower = Vector3.Distance(targetPosition, transform.position) / 2.0f * 0.1f;
+            Debug.Log( gameObject.name + ": " + chargePower);
             if (chargePower > 1) chargePower = 1;
-            //aiCon.Charge(chargePower);
-            aiCon.Charge(0.1f);
+            aiCon.Charge(chargePower);
+            //aiCon.Charge(0.1f);
         }
     }
 
@@ -215,7 +225,7 @@ public class AIBasic : MonoBehaviour
             }
         }
 
-        Debug.Log("Searching " + targetEnemy.name + " and " + nextNode.name);
+        //Debug.Log("Searching " + targetEnemy.name + " and " + nextNode.name);
 
     }
 
