@@ -41,9 +41,25 @@ public class PlayerSelection : MonoBehaviour
         {
             case Player.Player1:
                 ArenaSettings.instance.player1Vehicle = currentVehicle.name;
+                if(Input.GetKeyDown(KeyCode.D))
+                {
+                    OnNextButtonClicked();
+                }
+                if(Input.GetKeyDown(KeyCode.A))
+                {
+                    OnBackButtonClicked();
+                }
                 break;
             case Player.Player2:
                 ArenaSettings.instance.player2Vehicle = currentVehicle.name;
+                if(Input.GetKeyDown(KeyCode.RightArrow))
+                {
+                    OnNextButtonClicked();
+                }
+                if(Input.GetKeyDown(KeyCode.LeftArrow))
+                {
+                    OnBackButtonClicked();
+                }
                 break;
             case Player.Player3:
                 ArenaSettings.instance.player3Vehicle = currentVehicle.name;

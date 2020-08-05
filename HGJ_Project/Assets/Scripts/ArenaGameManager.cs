@@ -37,6 +37,14 @@ public class ArenaGameManager : MonoBehaviour
     public Text[] player2Score;
     public Text[] player3Score;
     public Text[] player4Score;
+    public Text[] player1Win;
+    public Text[] player2Win;
+    public Text[] player3Win;
+    public Text[] player4Win;
+
+    public List<Score> players = new List<Score>();
+
+    public int highestScore;
 
     private void Start()
     {
@@ -47,6 +55,10 @@ public class ArenaGameManager : MonoBehaviour
 
         roundTimeLeftPanel.SetActive(false);
         roundOverPanel.SetActive(false);
+
+        AddPlayers();
+
+
     }
 
     private void Update()
@@ -54,6 +66,23 @@ public class ArenaGameManager : MonoBehaviour
         RoundStartUpdate();
 
         UpdateLeaderboard();
+
+    }
+
+    private void AddPlayers()
+    {
+        if(player1 != null)
+            players.Add(player1);
+        if (player2 != null)
+            players.Add(player2);
+        if(player3 != null)
+        {
+            players.Add(player3);
+        }
+        if(player4 != null)
+        {
+            players.Add(player4);
+        }    
 
     }
 
@@ -74,6 +103,7 @@ public class ArenaGameManager : MonoBehaviour
                 player1Name[1].text = player1.name;
                 player1Score[0].text = player1.score.ToString();
                 player1Score[1].text = player1.score.ToString();
+
             }
             else
             {
@@ -94,6 +124,7 @@ public class ArenaGameManager : MonoBehaviour
                 player2Name[1].text = player2.name;
                 player2Score[0].text = player2.score.ToString();
                 player2Score[1].text = player2.score.ToString();
+
             }
 
             else
@@ -115,6 +146,7 @@ public class ArenaGameManager : MonoBehaviour
                 player3Name[1].text = player3.name;
                 player3Score[0].text = player3.score.ToString();
                 player3Score[1].text = player3.score.ToString();
+
             }
 
             else
@@ -136,6 +168,7 @@ public class ArenaGameManager : MonoBehaviour
                 player4Name[1].text = player4.name;
                 player4Score[0].text = player4.score.ToString();
                 player4Score[1].text = player4.score.ToString();
+
             }
             else
             {
@@ -171,6 +204,54 @@ public class ArenaGameManager : MonoBehaviour
             if(roundDurationTimer <= 0.5f)
             {
                 isRoundOver = true;
+
+                for(int i = 0; i < players.Count; i++)
+                {
+                    for(int j = 0; j < players.Count; j++)
+                    {
+                        if(players[j].score > players[i].score)
+                        {
+                            highestScore = players[j].score;
+                        }
+                    }
+                }
+
+                if(player1 != null)
+                {
+                    if (player1.score == highestScore)
+                    {
+                        player1Win[0].gameObject.SetActive(true);
+                        player1Win[1].gameObject.SetActive(true);
+                    }
+                }
+
+                if(player2 != null)
+                {
+                    if (player2.score == highestScore)
+                    {
+                        player2Win[0].gameObject.SetActive(true);
+                        player2Win[1].gameObject.SetActive(true);
+                    }
+                }
+
+                if(player3 != null)
+                {
+                    if (player3.score == highestScore)
+                    {
+                        player3Win[0].gameObject.SetActive(true);
+                        player3Win[1].gameObject.SetActive(true);
+                    }
+                }
+
+                if(player4 != null)
+                {
+                    if (player4.score == highestScore)
+                    {
+                        player4Win[0].gameObject.SetActive(true);
+                        player4Win[1].gameObject.SetActive(true);
+                    }
+                }
+
             }
             roundTimeLeftPanel.SetActive(true);
             roundTimeLeftText.text = "Time Left: " + Mathf.Round(roundDurationTimer);
