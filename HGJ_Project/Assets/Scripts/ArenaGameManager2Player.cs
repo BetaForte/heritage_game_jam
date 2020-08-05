@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class ArenaGameManager : MonoBehaviour
+public class ArenaGameManager2Player : MonoBehaviour
 {
     public float startRoundTimer;
     public float roundDurationTimer;
@@ -42,7 +42,13 @@ public class ArenaGameManager : MonoBehaviour
     public Text[] player3Win;
     public Text[] player4Win;
 
+    [Header("Pause Panel")]
+    public GameObject pausePanel;
+
     public List<Score> players = new List<Score>();
+
+    public bool pauseOpen;
+
 
     public int highestScore;
 
@@ -58,7 +64,6 @@ public class ArenaGameManager : MonoBehaviour
 
         AddPlayers();
 
-
     }
 
     private void Update()
@@ -67,6 +72,25 @@ public class ArenaGameManager : MonoBehaviour
 
         UpdateLeaderboard();
 
+        if(!pausePanel.activeInHierarchy && Input.GetKeyDown(KeyCode.Escape))
+        {
+            PauseGame();
+
+            pauseOpen = true;
+            StartCoroutine(PauseMenuDelay());
+        }
+
+        if (pausePanel.activeInHierarchy && Input.GetKeyDown(KeyCode.Escape) && !pauseOpen)
+        {
+            UnpauseGame();
+        }
+
+    }
+
+    private IEnumerator PauseMenuDelay()
+    {
+        yield return new WaitForEndOfFrame();
+        pauseOpen = false;
     }
 
     private void AddPlayers()
@@ -277,6 +301,21 @@ public class ArenaGameManager : MonoBehaviour
     public void OnMainMenuButtonClicked()
     {
         SceneManager.LoadScene(0);
+    }
+
+    public void PauseGame()
+    {
+        pausePanel.SetActive(true);
+
+        Time.timeScale = 0f;
+
+    }
+
+    public void UnpauseGame()
+    {
+        pausePanel.SetActive(false);
+
+        Time.timeScale = 1f;
     }
 
 

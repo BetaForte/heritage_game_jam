@@ -48,8 +48,13 @@ public class MenuTransitionBasic : MonoBehaviour
         }
     }
 
-    public void OnStartButtonClicked()
+    public void On2PlayerStartButtonClicked()
     {
         SceneManager.LoadScene(1);
+    }
+
+    public void On1PlayerStartButtonClicked()
+    {
+        SceneManager.LoadScene(2);
     }
 }

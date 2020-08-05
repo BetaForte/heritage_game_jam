@@ -9,9 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/LobbyScene.unity
     guid: 1c6e7361377ba6e49ad71767276cc336
   - enabled: 1
-    path: Assets/Scenes/ArenaGreyBox.unity
+    path: Assets/Scenes/2PlayerArena.unity
     guid: 6eccc19222d8ab94cba4cbba39cad5bd
   - enabled: 1
-    path: Assets/Scenes/PlayerMoveTest.unity
-    guid: 4ce64c03a2842ca4f80e648aea707366
+    path: Assets/Scenes/1P_ArenaGreyBox.unity
+    guid: 281952005352dea43abe86d87608622a
   m_configObjects: {}

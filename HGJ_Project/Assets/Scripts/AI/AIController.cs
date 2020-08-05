@@ -11,10 +11,13 @@ public class AIController : MonoBehaviour
     public float rotationSpeed = 10.0f;
     public float changeDirectionSpeed;
 
+    public BoxCollider[] bcArray;
+
     [HideInInspector]
     public Vector3 releasedDirection;
     Vector3 currentDirection;
 
+    public bool isDead;
     public bool fired;
     public bool isGrounded;
     public bool isHit;
@@ -26,9 +29,12 @@ public class AIController : MonoBehaviour
     Rigidbody rb;
     float angleToRotate;
 
+    Score scoreScript;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        scoreScript = GetComponent<Score>();
     }
 
     private void Update()
@@ -144,6 +150,43 @@ public class AIController : MonoBehaviour
             rb.constraints = RigidbodyConstraints.None;
             rb.constraints = RigidbodyConstraints.FreezeRotationY;
             rb.constraints = RigidbodyConstraints.FreezeRotationZ;
+        }
+    }
+
+    private void Die()
+    {
+        for (int i = 0; i < bcArray.Length; i++)
+        {
+            bcArray[i].enabled = false;
+        }
+        GetComponent<MeshRenderer>().enabled = false;
+    }
+
+    public void Respawn()
+    {
+        for (int i = 0; i < bcArray.Length; i++)
+        {
+            bcArray[i].enabled = true;
+        }
+        GetComponent<MeshRenderer>().enabled = true;
+        transform.rotation = Quaternion.Euler(0, 0, 0);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Deadzone")
+        {
+            if (scoreScript.lastVehicleInContact != null)
+            {
+                GameObject killer = scoreScript.lastVehicleInContact;
+                Score killerScore = killer.GetComponent<Score>();
+
+                killerScore.lastVehicleInContact = null;
+                killerScore.score++;
+            }
+
+            Die();
+
         }
     }
 

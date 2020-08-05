@@ -6,22 +6,43 @@ public class PlayerSpawner : MonoBehaviour
 {
     public Transform[] spawnPoints;
 
-
+    public bool isPlayer;
     PlayerMovement playerMovement;
+    AIController aiController;
 
     private void Start()
     {
-        playerMovement = GetComponent<PlayerMovement>();
+        if(isPlayer)
+        {
+            playerMovement = GetComponent<PlayerMovement>();
+        }
+        else
+        {
+            aiController = GetComponent<AIController>();
+        }
     }
 
     private void Update()
     {
-        if(playerMovement.isDead)
+        if(isPlayer)
         {
-            int randomSpawnPoint = Random.Range(0, spawnPoints.Length - 1);
-            transform.position = spawnPoints[randomSpawnPoint].position;
-            playerMovement.isDead = false;
-            playerMovement.Respawn();
+            if (playerMovement.isDead)
+            {
+                int randomSpawnPoint = Random.Range(0, spawnPoints.Length - 1);
+                transform.position = spawnPoints[randomSpawnPoint].position;
+                playerMovement.isDead = false;
+                playerMovement.Respawn();
+            }
+        }
+        else
+        {
+            if(aiController.isDead)
+            {
+                int randomSpawnPoint = Random.Range(0, spawnPoints.Length - 1);
+                transform.position = spawnPoints[randomSpawnPoint].position;
+                aiController.isDead = false;
+                aiController.Respawn();
+            }
         }
 
 

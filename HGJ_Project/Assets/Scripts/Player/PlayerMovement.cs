@@ -36,13 +36,18 @@ public class PlayerMovement : MonoBehaviour
 
     public HitCollider hc;
     Score scoreScript;
-
-    ArenaGameManager arenaGM;
+    
+    ArenaGameManager2Player arenaGM;
+    ArenaGameManager1Player arenaGM1;
 
     private void Awake()
     {
         scoreScript = GetComponent<Score>();
-        arenaGM = FindObjectOfType<ArenaGameManager>();
+        arenaGM = FindObjectOfType<ArenaGameManager2Player>();
+        if(arenaGM == null)
+        {
+            arenaGM1 = FindObjectOfType<ArenaGameManager1Player>();
+        }
 
 
     }
@@ -78,9 +83,16 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (!arenaGM.hasRoundStart || arenaGM.isRoundOver) return;
+        if(arenaGM == null)
+        {
+            if (!arenaGM1.hasRoundStart || arenaGM1.isRoundOver) return;
+        }
+        if(arenaGM != null)
+        {
+            if (!arenaGM.hasRoundStart || arenaGM.isRoundOver) return;
+        }
 
-        if(transform.position.y > 230)
+        if (transform.position.y > 230)
         {
             isGrounded = false;
         }
@@ -325,6 +337,8 @@ public class PlayerMovement : MonoBehaviour
         }
         GetComponent<MeshRenderer>().enabled = true;
         cinemachine.enabled = true;
+        transform.rotation = Quaternion.Euler(0, 0, 0);
+        chargeValue = 0;
     }
 
     private void OnTriggerEnter(Collider other)
