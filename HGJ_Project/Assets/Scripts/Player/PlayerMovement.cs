@@ -6,6 +6,7 @@ using UnityEngine.Rendering.PostProcessing;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public Player player;
     public CinemachineFreeLook cinemachine;
     public Rigidbody rb;
     public PostProcessVolume postProcessing;
@@ -32,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
     public bool isPlayer2;
     public float valueToLerp = 40;
 
+    public HitCollider hc;
     Score scoreScript;
 
     ArenaGameManager arenaGM;
@@ -40,6 +42,27 @@ public class PlayerMovement : MonoBehaviour
     {
         scoreScript = GetComponent<Score>();
         arenaGM = FindObjectOfType<ArenaGameManager>();
+
+
+    }
+
+    private void Start()
+    {
+        for (int i = 0; i < ArenaSettings.instance.vehicleTypes.Count; i++)
+        {
+            switch (player)
+            {
+                case Player.Player1:
+                    if (ArenaSettings.instance.vehicleTypes[i].vehicleTypeName == ArenaSettings.instance.player1Vehicle)
+                    {
+                        chargeTime = ArenaSettings.instance.vehicleTypes[i].chargeTime;
+                        vehicleMaxSpeed = ArenaSettings.instance.vehicleTypes[i].vehicleMaxSpeed;
+                        hc.knockbackStrength = ArenaSettings.instance.vehicleTypes[i].knockbackStrength;
+                        GetComponent<MeshRenderer>().material = ArenaSettings.instance.vehicleTypes[i].vehicleMaterial;
+                    }
+                    break;
+            }
+        }
     }
 
     private void Update()
