@@ -118,6 +118,7 @@ public class PlayerMovement : MonoBehaviour
             Quaternion finalRotation = Quaternion.Euler(0, transform.eulerAngles.y, 0);
             transform.localRotation = Quaternion.Slerp(transform.rotation, finalRotation, Time.deltaTime * 5);
         }
+
         else
         {
             rb.constraints = RigidbodyConstraints.None;
@@ -218,9 +219,7 @@ public class PlayerMovement : MonoBehaviour
                 }
                 if (isGrounded)
                 {
-                    rb.velocity = releasedDirection * vehicleMaxSpeed;
-                    Quaternion finalRotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, 0);
-                    transform.localRotation = Quaternion.Slerp(transform.rotation, finalRotation, Time.deltaTime * 5);
+                    rb.velocity = new Vector3(releasedDirection.x * vehicleMaxSpeed, releasedDirection.y*vehicleMaxSpeed, releasedDirection.z * vehicleMaxSpeed);
                 }
 
             }

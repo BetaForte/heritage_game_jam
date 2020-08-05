@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ArenaGameManager : MonoBehaviour
 {
@@ -176,6 +177,16 @@ public class ArenaGameManager : MonoBehaviour
 
         hasRoundStart = true;
         roundStartPanel.SetActive(false);
+    }
+
+    public void OnPlayAgainButtonClicked()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void OnMainMenuButtonClicked()
+    {
+        SceneManager.LoadScene(0);
     }
 
 
