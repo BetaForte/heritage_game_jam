@@ -57,10 +57,9 @@ public class ArenaGameManager : MonoBehaviour
 
     private void UpdateLeaderboard()
     {
-        if (roundDurationTimer <= 0)
+        if (isRoundOver)
         {
             roundOverPanel.SetActive(true);
-            isRoundOver = true;
 
             if (player1 != null)
             {
@@ -162,7 +161,15 @@ public class ArenaGameManager : MonoBehaviour
 
         if (hasRoundStart)
         {
-            roundDurationTimer -= Time.deltaTime;
+            if(roundDurationTimer >= 0.5f)
+            {
+                roundDurationTimer -= Time.deltaTime;
+            }
+
+            if(roundDurationTimer <= 0.5f)
+            {
+                isRoundOver = true;
+            }
             roundTimeLeftPanel.SetActive(true);
             roundTimeLeftText.text = "Time Left: " + Mathf.Round(roundDurationTimer);
             roundTimeLeftText2.text = "Time Left: " + Mathf.Round(roundDurationTimer);
