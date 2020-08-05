@@ -19,19 +19,19 @@ public class GenerateSmoke : MonoBehaviour
     {
         if(aiCon)
         {
-            if (aiCon.chargeTime > 0)
+            if (aiCon.fired)
                 particle.SetActive(true);
             else
                 particle.SetActive(false);
-            particle.SetActive(Vector3.SqrMagnitude(GetComponent<Rigidbody>().velocity) > 0 && aiCon.isGrounded);
+            //particle.SetActive(Vector3.SqrMagnitude(GetComponent<Rigidbody>().velocity) > 0 && aiCon.isGrounded);
         }
         else if(playerCon)
         {
-            if (playerCon.chargeTime > 0)
+            if (playerCon.fired)
                 particle.SetActive(true);
             else
                 particle.SetActive(false);
-            particle.SetActive(Vector3.SqrMagnitude(GetComponent<Rigidbody>().velocity) > 0 && playerCon.isGrounded);
+            //particle.SetActive(Vector3.SqrMagnitude(GetComponent<Rigidbody>().velocity) > 0 && playerCon.isGrounded);
         }
     }
 }

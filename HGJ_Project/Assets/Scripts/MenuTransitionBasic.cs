@@ -9,6 +9,8 @@ public class MenuTransitionBasic : MonoBehaviour
     public GameObject prevPage;
     public List<GameObject> customPages = new List<GameObject>();
 
+    public GameObject loadingPage;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,11 +52,26 @@ public class MenuTransitionBasic : MonoBehaviour
 
     public void On2PlayerStartButtonClicked()
     {
+        if(loadingPage)
+        {
+            loadingPage.SetActive(true);
+            gameObject.SetActive(false);
+        }
         SceneManager.LoadScene(1);
     }
 
     public void On1PlayerStartButtonClicked()
     {
+        if (loadingPage)
+        {
+            loadingPage.SetActive(true);
+            gameObject.SetActive(false);
+        }
         SceneManager.LoadScene(2);
+    }
+
+    public void ButtonQuit()
+    {
+        Application.Quit();
     }
 }

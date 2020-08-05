@@ -151,6 +151,7 @@ public class AIController : MonoBehaviour
             bcArray[i].enabled = false;
         }
         GetComponent<MeshRenderer>().enabled = false;
+        isDead = true;
     }
 
     public void Respawn()
