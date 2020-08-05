@@ -200,10 +200,11 @@ public class PlayerMovement : MonoBehaviour
 
             releasedDirection = Vector3.MoveTowards(releasedDirection, currentDirection, Time.deltaTime * changeDirectionSpeed);
 
+            chargeValue -= Time.deltaTime / chargeTime;
+
             if (isGrounded)
             {
                 flyDirection = transform.forward;
-                chargeValue -= Time.deltaTime / chargeTime;
             }
 
             if (chargeValue <= 0 && isGrounded)
