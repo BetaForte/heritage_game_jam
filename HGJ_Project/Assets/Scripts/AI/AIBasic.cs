@@ -28,7 +28,7 @@ public class AIBasic : MonoBehaviour
     Vector3 targetPosition;
     float chargeLifeTime;
     float restTimer;
-    bool targetingPlayer;
+    //bool targetingPlayer;
 
     // Start is called before the first frame update
     void Start()
@@ -140,12 +140,12 @@ public class AIBasic : MonoBehaviour
         if (Vector3.Distance(targetEnemy.transform.position, transform.position) < 10)
         {
             targetPosition = targetEnemy.transform.position;
-            targetingPlayer = true;
+            //targetingPlayer = true;
         }
         else
         {
             targetPosition = nextNode.transform.position;
-            targetingPlayer = false;
+            //targetingPlayer = false;
         }
         
         Vector3 originalRot = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z);
