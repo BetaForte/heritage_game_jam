@@ -167,7 +167,7 @@ public class AIBasic : MonoBehaviour
             currentState = "ChargeState";
             aiCon.releasedDirection = transform.forward;
             float chargePower = Vector3.Distance(targetPosition, transform.position) / 2.0f * 0.1f;
-            Debug.Log( gameObject.name + ": " + chargePower);
+            //Debug.Log( gameObject.name + ": " + chargePower);
             if (chargePower > 1) chargePower = 1;
             aiCon.Charge(chargePower);
             //aiCon.Charge(0.1f);
