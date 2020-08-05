@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6498950937838602465
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6498950937838602467}
+  - component: {fileID: 6498950937838602464}
+  m_Layer: 0
+  m_Name: ArenaSettings
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6498950937838602467
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6498950937838602465}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 960, y: 540, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6498950937838602464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6498950937838602465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc37ce47c3f5f4441ae2377f9e43b129, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vehicleTypes:
+  - vehicleTypeName: Normal Vehicle
+    vehicleMaterial: {fileID: 2100000, guid: babd5aef8036b5846ac6b0b575cfbdd5, type: 2}
+    chargeTime: 1.5
+    vehicleMaxSpeed: 15
+    knockbackStrength: 5
+  - vehicleTypeName: Speed Vehicle
+    vehicleMaterial: {fileID: 2100000, guid: 7f7a32e51ed59d643ab592c09d851a88, type: 2}
+    chargeTime: 1.5
+    vehicleMaxSpeed: 20
+    knockbackStrength: 1
+  player1Vehicle: 
+  player2Vehicle: 
+  player3Vehicle: 
+  player4Vehicle: 
+  roundTime: 20
