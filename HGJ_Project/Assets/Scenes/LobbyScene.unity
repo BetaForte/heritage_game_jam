@@ -7882,6 +7882,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6498950937838602464, guid: 9c8849ff05fa6d44ba78850790f5a64d,
+        type: 3}
+      propertyPath: roundTime
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 6498950937838602465, guid: 9c8849ff05fa6d44ba78850790f5a64d,
         type: 3}
       propertyPath: m_Name
