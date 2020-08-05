@@ -69,7 +69,7 @@ public class PlayerSelection : MonoBehaviour
 
     public void OnBackButtonClicked()
     {
-        if(index <= vehicles.Length)
+        if(index <= 0)
         {
             index = vehicles.Length - 1;
         }

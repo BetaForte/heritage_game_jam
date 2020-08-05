@@ -844,7 +844,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f8d6642c4443f54b805077e616aec97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startRoundTimer: 0
+  startRoundTimer: 3
   roundDurationTimer: 20
   player1: {fileID: 0}
   player2: {fileID: 0}

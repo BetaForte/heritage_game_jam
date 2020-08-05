@@ -61,6 +61,16 @@ public class PlayerMovement : MonoBehaviour
                         GetComponent<MeshRenderer>().material = ArenaSettings.instance.vehicleTypes[i].vehicleMaterial;
                     }
                     break;
+
+                case Player.Player2:
+                    if (ArenaSettings.instance.vehicleTypes[i].vehicleTypeName == ArenaSettings.instance.player2Vehicle)
+                    {
+                        chargeTime = ArenaSettings.instance.vehicleTypes[i].chargeTime;
+                        vehicleMaxSpeed = ArenaSettings.instance.vehicleTypes[i].vehicleMaxSpeed;
+                        hc.knockbackStrength = ArenaSettings.instance.vehicleTypes[i].knockbackStrength;
+                        GetComponent<MeshRenderer>().material = ArenaSettings.instance.vehicleTypes[i].vehicleMaterial;
+                    }
+                    break;
             }
         }
     }

@@ -40,6 +40,8 @@ public class ArenaGameManager : MonoBehaviour
 
     private void Start()
     {
+        roundDurationTimer = ArenaSettings.instance.roundTime;
+
         if(!hasRoundStart)
         roundStartPanel.SetActive(true);
 
