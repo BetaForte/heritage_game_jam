@@ -42,17 +42,6 @@ public class PlayerMovement : MonoBehaviour
         arenaGM = FindObjectOfType<ArenaGameManager>();
     }
 
-    private void FixedUpdate()
-    {
-        if (!isHit)
-        {
-            LookAround();
-            Fire();
-            FixPlayerRotation();
-            RotationInput();
-        }
-    }
-
     private void Update()
     {
         if (!arenaGM.hasRoundStart || arenaGM.isRoundOver) return;
@@ -65,6 +54,10 @@ public class PlayerMovement : MonoBehaviour
         if(!isHit)
         {
             Charging();
+            LookAround();
+            Fire();
+            FixPlayerRotation();
+            RotationInput();
         }
 
         if (isHit)
