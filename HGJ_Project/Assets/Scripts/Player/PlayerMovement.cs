@@ -345,7 +345,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Deadzone")
+        if (arenaGM1.isRoundOver) return;
+        if (other.tag == "Deadzone")
         {
             if(scoreScript.lastVehicleInContact != null)
             {
