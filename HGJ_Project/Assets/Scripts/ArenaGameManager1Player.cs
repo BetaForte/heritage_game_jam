@@ -53,14 +53,12 @@ public class ArenaGameManager1Player : MonoBehaviour
     {
         if (ArenaSettings.instance.player3Vehicle == "None")
         {
-            Destroy(player3.gameObject);
-
+            player3.gameObject.SetActive(false);
         }
 
         if (ArenaSettings.instance.player4Vehicle == "None")
         {
-            Destroy(player4.gameObject);
-
+            player4.gameObject.SetActive(false);
         }
 
         roundDurationTimer = ArenaSettings.instance.roundTime;
@@ -99,15 +97,15 @@ public class ArenaGameManager1Player : MonoBehaviour
 
     private void AddPlayers()
     {
-        if (player1 != null)
+        if (player1.gameObject.activeInHierarchy)
             players.Add(player1);
-        if (player2 != null)
+        if (player2.gameObject.activeInHierarchy)
             players.Add(player2);
-        if (player3 != null)
+        if (player3.gameObject.activeInHierarchy)
         {
             players.Add(player3);
         }
-        if (player4 != null)
+        if (player4.gameObject.activeInHierarchy)
         {
             players.Add(player4);
         }
@@ -120,7 +118,7 @@ public class ArenaGameManager1Player : MonoBehaviour
         {
             roundOverPanel.SetActive(true);
 
-            if (player1 != null)
+            if (player1.gameObject.activeInHierarchy)
             {
                 player1Name.gameObject.SetActive(true);
                 player1Score.gameObject.SetActive(true);
@@ -135,7 +133,7 @@ public class ArenaGameManager1Player : MonoBehaviour
                 player1Score.gameObject.SetActive(false);
             }
 
-            if (player2 != null)
+            if (player2.gameObject.activeInHierarchy)
             {
                 player2Name.gameObject.SetActive(true);
                 player2Score.gameObject.SetActive(true);
@@ -151,7 +149,7 @@ public class ArenaGameManager1Player : MonoBehaviour
                 player1Score.gameObject.SetActive(false);
             }
 
-            if (player3 != null)
+            if (player3.gameObject.activeInHierarchy)
             {
                 player3Name.gameObject.SetActive(true);
                 player3Score.gameObject.SetActive(true);
@@ -167,7 +165,7 @@ public class ArenaGameManager1Player : MonoBehaviour
                 player3Score.gameObject.SetActive(false);
             }
 
-            if (player4 != null)
+            if (player4.gameObject.activeInHierarchy)
             {
                 player4Name.gameObject.SetActive(true);
                 player4Score.gameObject.SetActive(true);
@@ -219,7 +217,7 @@ public class ArenaGameManager1Player : MonoBehaviour
                     }
                 }
 
-                if (player1 != null)
+                if (player1.gameObject.activeInHierarchy)
                 {
                     if (player1.score == highestScore)
                     {
@@ -227,7 +225,7 @@ public class ArenaGameManager1Player : MonoBehaviour
                     }
                 }
 
-                if (player2 != null)
+                if (player2.gameObject.activeInHierarchy)
                 {
                     if (player2.score == highestScore)
                     {
@@ -235,7 +233,7 @@ public class ArenaGameManager1Player : MonoBehaviour
                     }
                 }
 
-                if (player3 != null)
+                if (player3.gameObject.activeInHierarchy)
                 {
                     if (player3.score == highestScore)
                     {
@@ -243,7 +241,7 @@ public class ArenaGameManager1Player : MonoBehaviour
                     }
                 }
 
-                if (player4 != null)
+                if (player4.gameObject.activeInHierarchy)
                 {
                     if (player4.score == highestScore)
                     {
