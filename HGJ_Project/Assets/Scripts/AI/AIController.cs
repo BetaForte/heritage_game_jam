@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class AIController : MonoBehaviour
 {
+    public Player player;
+    public HitCollider hc;
+
     //time to move in max speed (in seconds)
     public float chargeTime;
     //max speed of the vehicle
@@ -33,6 +36,8 @@ public class AIController : MonoBehaviour
     ArenaGameManager2Player arenaGM;
     ArenaGameManager1Player arenaGM1;
 
+
+
     private void Awake()
     {
         arenaGM = FindObjectOfType<ArenaGameManager2Player>();
@@ -46,6 +51,45 @@ public class AIController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         scoreScript = GetComponent<Score>();
+
+        for (int i = 0; i < ArenaSettings.instance.vehicleTypes.Count; i++)
+        {
+            switch (player)
+            {
+                case Player.Player2:
+                    if (ArenaSettings.instance.vehicleTypes[i].vehicleTypeName == ArenaSettings.instance.player2Vehicle)
+                    {
+                        chargeTime = ArenaSettings.instance.vehicleTypes[i].chargeTime;
+                        vehicleMaxSpeed = ArenaSettings.instance.vehicleTypes[i].vehicleMaxSpeed;
+                        hc.knockbackStrength = ArenaSettings.instance.vehicleTypes[i].knockbackStrength;
+                        GetComponent<MeshRenderer>().material = ArenaSettings.instance.vehicleTypes[i].vehicleMaterial;
+                        GetComponent<MeshFilter>().mesh = ArenaSettings.instance.vehicleTypes[i].meshRender;
+                    }
+                    break;
+
+                case Player.Player3:
+                    if (ArenaSettings.instance.vehicleTypes[i].vehicleTypeName == ArenaSettings.instance.player3Vehicle)
+                    {
+                        chargeTime = ArenaSettings.instance.vehicleTypes[i].chargeTime;
+                        vehicleMaxSpeed = ArenaSettings.instance.vehicleTypes[i].vehicleMaxSpeed;
+                        hc.knockbackStrength = ArenaSettings.instance.vehicleTypes[i].knockbackStrength;
+                        GetComponent<MeshRenderer>().material = ArenaSettings.instance.vehicleTypes[i].vehicleMaterial;
+                        GetComponent<MeshFilter>().mesh = ArenaSettings.instance.vehicleTypes[i].meshRender;
+                    }
+                    break;
+
+                case Player.Player4:
+                    if (ArenaSettings.instance.vehicleTypes[i].vehicleTypeName == ArenaSettings.instance.player4Vehicle)
+                    {
+                        chargeTime = ArenaSettings.instance.vehicleTypes[i].chargeTime;
+                        vehicleMaxSpeed = ArenaSettings.instance.vehicleTypes[i].vehicleMaxSpeed;
+                        hc.knockbackStrength = ArenaSettings.instance.vehicleTypes[i].knockbackStrength;
+                        GetComponent<MeshRenderer>().material = ArenaSettings.instance.vehicleTypes[i].vehicleMaterial;
+                        GetComponent<MeshFilter>().mesh = ArenaSettings.instance.vehicleTypes[i].meshRender;
+                    }
+                    break;
+            }
+        }
     }
 
     private void Update()
