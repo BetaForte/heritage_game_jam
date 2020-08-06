@@ -8,15 +8,33 @@ public class Options : MonoBehaviour
     public Slider sfxSlider;
     public Slider bgmSlider;
 
-    // Start is called before the first frame update
-    void Start()
+
+    private void Update()
     {
-        
+        foreach(AudioSource aSource in SoundManager.instance.bgm)
+        {
+            aSource.volume = bgmSlider.value;
+        }
+
+        foreach (AudioSource aSource in SoundManager.instance.sfx)
+        {
+            aSource.volume = sfxSlider.value;
+        }
+
+
     }
 
-    // Update is called once per frame
-    void Update()
+
+    public void ToggleFullscreen(bool fullscreen)
     {
-        
+        if(fullscreen)
+        {
+            Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
+        }
+        else
+        {
+            Screen.fullScreenMode = FullScreenMode.Windowed;
+        }
     }
+
 }

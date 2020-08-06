@@ -196,6 +196,7 @@ public class AIController : MonoBehaviour
         }
         GetComponent<MeshRenderer>().enabled = false;
         isDead = true;
+        fired = false;
     }
 
     public void Respawn()
