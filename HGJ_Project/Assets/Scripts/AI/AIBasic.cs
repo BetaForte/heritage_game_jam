@@ -75,8 +75,16 @@ public class AIBasic : MonoBehaviour
     void ChangeTarget()
     {
         currentState = "SetRotation";
+
+        foreach (GameObject enemy in enemyList)
+        {
+            if (!enemy.activeSelf)
+                continue;
+            if (!targetEnemy)
+                targetEnemy = enemy;
+        }
         if (!targetEnemy)
-            targetEnemy = enemyList[0];
+            return;
         ResetNextNode();
 
         AIController enemyAI = targetEnemy.GetComponent<AIController>();
@@ -172,7 +180,7 @@ public class AIBasic : MonoBehaviour
             aiCon.releasedDirection = transform.forward;
             float chargePower = Vector3.Distance(targetPosition, transform.position) / 2.0f * 0.1f;
             //Debug.Log( gameObject.name + ": " + chargePower);
-            if (chargePower > 1) chargePower = 1;
+            if (chargePower > 0.75f) chargePower = 0.75f;
             if (targetingPlayer) chargePower = 0.25f;
             aiCon.Charge(chargePower);
             //aiCon.Charge(0.1f);
