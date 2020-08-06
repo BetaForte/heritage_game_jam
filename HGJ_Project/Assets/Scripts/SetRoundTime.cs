@@ -19,11 +19,11 @@ public class SetRoundTime : MonoBehaviour
         if (index == 1)
             currentTimeText.text = "1 MINUTE";
         if (index == 2)
-            currentTimeText.text = "2 MINUTE";
+            currentTimeText.text = "2 MINUTES";
         if (index == 3)
-            currentTimeText.text = "3 MINUTE";
+            currentTimeText.text = "3 MINUTES";
         if (index == 4)
-            currentTimeText.text = "5 MINUTE";
+            currentTimeText.text = "5 MINUTES";
     }
 
     public void OnRightButtonClicked()
