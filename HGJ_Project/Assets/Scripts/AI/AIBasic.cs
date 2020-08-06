@@ -28,7 +28,7 @@ public class AIBasic : MonoBehaviour
     Vector3 targetPosition;
     float chargeLifeTime;
     float restTimer;
-    //bool targetingPlayer;
+    bool targetingPlayer;
 
     // Start is called before the first frame update
     void Start()
@@ -140,18 +140,22 @@ public class AIBasic : MonoBehaviour
         if (Vector3.Distance(targetEnemy.transform.position, transform.position) < 10)
         {
             targetPosition = targetEnemy.transform.position;
-            //targetingPlayer = true;
+            targetingPlayer = true;
         }
+        
         else
         {
             targetPosition = nextNode.transform.position;
-            //targetingPlayer = false;
+            targetingPlayer = false;
         }
         
         Vector3 originalRot = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z);
         transform.LookAt(targetPosition);
         targetRotation = transform.eulerAngles.y;
         transform.eulerAngles = originalRot;
+
+        if (targetingPlayer)
+            targetRotation += Random.Range(-10, 10);
 
         currentState = "RotateState";
     }
@@ -169,6 +173,7 @@ public class AIBasic : MonoBehaviour
             float chargePower = Vector3.Distance(targetPosition, transform.position) / 2.0f * 0.1f;
             //Debug.Log( gameObject.name + ": " + chargePower);
             if (chargePower > 1) chargePower = 1;
+            if (targetingPlayer) chargePower = 0.25f;
             aiCon.Charge(chargePower);
             //aiCon.Charge(0.1f);
         }
