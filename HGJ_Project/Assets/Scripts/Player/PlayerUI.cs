@@ -11,30 +11,16 @@ public class PlayerUI : MonoBehaviour
     public GameObject gauge;
     public Image slider;
 
-    [Header("Nitro Gauge")]
-    public GameObject nitroGauge;
-    public Image nitroSlider;
 
     private void Start()
     {
         gauge.SetActive(false);
-        nitroGauge.SetActive(false);
     }
 
     void Update()
     {
         PlayerCharging();
 
-
-        if (player.fired)
-        {
-            nitroGauge.SetActive(true);
-            nitroSlider.fillAmount = player.chargeValue / player.chargeTime;
-        }
-        else
-        {
-            nitroGauge.SetActive(false);
-        }
     }
 
     private void PlayerCharging()

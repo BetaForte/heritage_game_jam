@@ -36,6 +36,8 @@ public class AIController : MonoBehaviour
     ArenaGameManager2Player arenaGM;
     ArenaGameManager1Player arenaGM1;
 
+    WhiteboardKiller whiteboard;
+
 
 
     private void Awake()
@@ -45,6 +47,8 @@ public class AIController : MonoBehaviour
         {
             arenaGM1 = FindObjectOfType<ArenaGameManager1Player>();
         }
+
+        whiteboard = FindObjectOfType<WhiteboardKiller>();
     }
 
     private void Start()
@@ -213,22 +217,19 @@ public class AIController : MonoBehaviour
     {
         if (other.tag == "Deadzone")
         {
-            if (arenaGM == null)
-            {
-                if (arenaGM1.isRoundOver) return;
-            }
-            if (arenaGM != null)
-            {
-                if (arenaGM.isRoundOver) return;
-            }
+
 
             if (scoreScript.lastVehicleInContact != null)
             {
                 GameObject killer = scoreScript.lastVehicleInContact;
                 Score killerScore = killer.GetComponent<Score>();
 
+                whiteboard.Killer(scoreScript.gameObject.name, scoreScript.lastVehicleInContact.name);
+
                 killerScore.lastVehicleInContact = null;
                 killerScore.score++;
+
+                
             }
 
             Die();

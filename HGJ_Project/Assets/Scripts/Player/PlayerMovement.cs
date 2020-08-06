@@ -37,8 +37,10 @@ public class PlayerMovement : MonoBehaviour
     public HitCollider hc;
     Score scoreScript;
     
-    ArenaGameManager2Player arenaGM;
-    ArenaGameManager1Player arenaGM1;
+    public ArenaGameManager2Player arenaGM;
+    public ArenaGameManager1Player arenaGM1;
+
+    WhiteboardKiller whiteboard;
 
     private void Awake()
     {
@@ -48,6 +50,8 @@ public class PlayerMovement : MonoBehaviour
         {
             arenaGM1 = FindObjectOfType<ArenaGameManager1Player>();
         }
+
+        whiteboard = FindObjectOfType<WhiteboardKiller>();
 
 
     }
@@ -360,6 +364,8 @@ public class PlayerMovement : MonoBehaviour
             {
                 GameObject killer = scoreScript.lastVehicleInContact;
                 Score killerScore = killer.GetComponent<Score>();
+
+                whiteboard.Killer(scoreScript.lastVehicleInContact.name, scoreScript.gameObject.name);
 
                 killerScore.lastVehicleInContact = null;
                 killerScore.score++;
