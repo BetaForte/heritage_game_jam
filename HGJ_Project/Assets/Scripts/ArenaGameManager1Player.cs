@@ -51,6 +51,18 @@ public class ArenaGameManager1Player : MonoBehaviour
 
     private void Start()
     {
+        if (ArenaSettings.instance.player3Vehicle == "None")
+        {
+            Destroy(player3.gameObject);
+
+        }
+
+        if (ArenaSettings.instance.player4Vehicle == "None")
+        {
+            Destroy(player4.gameObject);
+
+        }
+
         roundDurationTimer = ArenaSettings.instance.roundTime;
 
         if (!hasRoundStart)

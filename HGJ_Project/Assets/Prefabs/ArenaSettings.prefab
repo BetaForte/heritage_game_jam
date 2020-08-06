@@ -45,11 +45,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vehicleTypes:
   - vehicleTypeName: Normal Vehicle
+    meshRender: {fileID: 4298779393402551167, guid: b06b4a65839b2c743bd56035fa160fe9,
+      type: 3}
     vehicleMaterial: {fileID: 2100000, guid: babd5aef8036b5846ac6b0b575cfbdd5, type: 2}
     chargeTime: 1.5
     vehicleMaxSpeed: 15
     knockbackStrength: 5
   - vehicleTypeName: Speed Vehicle
+    meshRender: {fileID: 4298779393402551167, guid: b06b4a65839b2c743bd56035fa160fe9,
+      type: 3}
     vehicleMaterial: {fileID: 2100000, guid: 7f7a32e51ed59d643ab592c09d851a88, type: 2}
     chargeTime: 1.5
     vehicleMaxSpeed: 20
@@ -58,4 +62,4 @@ MonoBehaviour:
   player2Vehicle: 
   player3Vehicle: 
   player4Vehicle: 
-  roundTime: 20
+  roundTime: 40

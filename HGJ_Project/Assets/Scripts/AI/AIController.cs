@@ -168,7 +168,15 @@ public class AIController : MonoBehaviour
     {
         if (other.tag == "Deadzone")
         {
-            if (arenaGM1.isRoundOver) return;
+            if (arenaGM == null)
+            {
+                if (arenaGM1.isRoundOver) return;
+            }
+            if (arenaGM != null)
+            {
+                if (arenaGM.isRoundOver) return;
+            }
+
             if (scoreScript.lastVehicleInContact != null)
             {
                 GameObject killer = scoreScript.lastVehicleInContact;

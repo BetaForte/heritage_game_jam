@@ -52,8 +52,22 @@ public class ArenaGameManager2Player : MonoBehaviour
 
     public int highestScore;
 
+
     private void Start()
     {
+
+        if (ArenaSettings.instance.player3Vehicle == "None")
+        {
+            Destroy(player3.gameObject);
+
+        }
+
+        if (ArenaSettings.instance.player4Vehicle == "None")
+        {
+            Destroy(player4.gameObject);
+
+        }
+
         roundDurationTimer = ArenaSettings.instance.roundTime;
 
         if(!hasRoundStart)

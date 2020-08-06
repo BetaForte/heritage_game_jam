@@ -11,43 +11,30 @@ public class PlayerUI : MonoBehaviour
     public GameObject gauge;
     public Image slider;
 
-    [Header("Current Speed")]
-    public GameObject speedMetre;
-    public Text speedText;
-
-    [Header("Pause Menu")]
-    public GameObject pauseMenu;
+    [Header("Nitro Gauge")]
+    public GameObject nitroGauge;
+    public Image nitroSlider;
 
     private void Start()
     {
         gauge.SetActive(false);
-        speedMetre.SetActive(true);
-        speedText.text = "0 km/h";
+        nitroGauge.SetActive(false);
     }
 
     void Update()
     {
         PlayerCharging();
 
-        if(player.fired)
+
+        if (player.fired)
         {
-            speedText.text = Mathf.Round(player.chargeValue) + " km/h";
+            nitroGauge.SetActive(true);
+            nitroSlider.fillAmount = player.chargeValue / player.chargeTime;
         }
-    }
-
-    public void OnPauseButtonClicked()
-    {
-        pauseMenu.SetActive(true);
-    }
-
-    public void OnResumeButtonClicked()
-    {
-        pauseMenu.SetActive(false);
-    }
-
-    public void OnQuitButtonClicked()
-    {
-
+        else
+        {
+            nitroGauge.SetActive(false);
+        }
     }
 
     private void PlayerCharging()
