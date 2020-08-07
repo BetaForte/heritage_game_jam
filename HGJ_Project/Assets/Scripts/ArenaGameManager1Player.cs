@@ -121,11 +121,6 @@ public class ArenaGameManager1Player : MonoBehaviour
         if (isRoundOver)
         {
             Time.timeScale = 0;
-            if(!isPlayingBGM)
-            {
-                SoundManager.instance.bgm[0].Play();
-                isPlayingBGM = true;
-            }
             roundOverPanel.SetActive(true);
 
             if (player1.gameObject.activeInHierarchy)
@@ -269,6 +264,12 @@ public class ArenaGameManager1Player : MonoBehaviour
     {
         roundStartTimerText.text = "GO!";
         yield return new WaitForSeconds(1f);
+
+        if (!isPlayingBGM)
+        {
+            SoundManager.instance.bgm[0].Play();
+            isPlayingBGM = true;
+        }
 
         hasRoundStart = true;
         roundStartPanel.SetActive(false);

@@ -41,11 +41,13 @@ public class PlayerMovement : MonoBehaviour
     public ArenaGameManager1Player arenaGM1;
 
     WhiteboardKiller whiteboard;
+    GenerateSmoke smoke;
 
     bool isSoundPlayed = false;
 
     private void Awake()
     {
+        smoke = GetComponent<GenerateSmoke>();
         scoreScript = GetComponent<Score>();
         arenaGM = FindObjectOfType<ArenaGameManager2Player>();
         if(arenaGM == null)
@@ -116,6 +118,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (isHit)
         {
+            smoke.PlayHit();
             StartCoroutine(DamageSpin(spinTime));
         }
 
@@ -131,6 +134,7 @@ public class PlayerMovement : MonoBehaviour
             SoundManager.instance.PlaySFX(playRandomHitFX);
             isSoundPlayed = true;
         }
+
 
         transform.Rotate(0, 1000f * Time.deltaTime, 0);
         yield return new WaitForSeconds(duration);

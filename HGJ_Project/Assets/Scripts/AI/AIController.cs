@@ -155,6 +155,8 @@ public class AIController : MonoBehaviour
             isSoundPlayed = true;
         }
 
+        GetComponent<GenerateSmoke>().PlayHit();
+
         transform.Rotate(0, 1000f * Time.deltaTime, 0);
         yield return new WaitForSeconds(duration);
         isHit = false;

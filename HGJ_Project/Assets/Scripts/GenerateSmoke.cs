@@ -43,6 +43,9 @@ public class GenerateSmoke : MonoBehaviour
 
     public void PlayHit()
     {
-        hitParticle.GetComponent<ParticleSystem>().Play();
+        if(!hitParticle.GetComponent<ParticleSystem>().isPlaying)
+        {
+            hitParticle.GetComponent<ParticleSystem>().Play();
+        }
     }
 }
