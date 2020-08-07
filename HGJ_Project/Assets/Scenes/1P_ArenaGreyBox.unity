@@ -1895,6 +1895,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorLP
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d140a9b21390e3d438bdcd62c3713e87,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6589126927893049898, guid: d140a9b21390e3d438bdcd62c3713e87,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -5354,7 +5359,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7063367803288013797}
-  m_LocalRotation: {x: 0.12899207, y: -0.000000017062634, z: 0.0000000022194866, w: 0.99164563}
+  m_LocalRotation: {x: 0.12899207, y: 0.00000001706263, z: -0.0000000022194864, w: 0.99164563}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -6110,7 +6115,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8104290759927249664}
-  m_LocalRotation: {x: 0.16492842, y: 0.000000016970748, z: -0.000000002837821, w: 0.9863056}
+  m_LocalRotation: {x: 0.16492842, y: -0.000000016970748, z: 0.000000002837821, w: 0.9863056}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
