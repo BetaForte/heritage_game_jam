@@ -309,6 +309,12 @@ public class ArenaGameManager2Player : MonoBehaviour
         roundStartTimerText2.text = "GO!";
         yield return new WaitForSeconds(1f);
 
+        if (!isPlayingBGM)
+        {
+            SoundManager.instance.bgm[0].Play();
+            isPlayingBGM = true;
+        }
+
         hasRoundStart = true;
         roundStartPanel.SetActive(false);
     }

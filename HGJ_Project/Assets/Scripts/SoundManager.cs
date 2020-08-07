@@ -44,6 +44,12 @@ public class SoundManager : MonoBehaviour
             bgm[1].volume = countUp;
 
         }
+
+        if (SceneManager.GetActiveScene().buildIndex == 1 || SceneManager.GetActiveScene().buildIndex == 2)
+        {
+            bgm[1].Stop();
+
+        }
     }
 
     public void PlaySFX(int index)
