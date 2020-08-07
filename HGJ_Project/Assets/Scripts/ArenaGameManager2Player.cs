@@ -52,10 +52,13 @@ public class ArenaGameManager2Player : MonoBehaviour
 
     public int highestScore;
 
+    bool isPlayingBGM = false;
+
 
     private void Start()
     {
-
+        Time.timeScale = 1;
+        isPlayingBGM = false;
         if (ArenaSettings.instance.player3Vehicle == "None")
         {
             player3.gameObject.SetActive(false);
@@ -127,6 +130,13 @@ public class ArenaGameManager2Player : MonoBehaviour
     {
         if (isRoundOver)
         {
+            Time.timeScale = 0;
+            if (!isPlayingBGM)
+            {
+                SoundManager.instance.bgm[0].Play();
+                isPlayingBGM = true;
+            }
+
             roundOverPanel.SetActive(true);
 
             if (player1.gameObject.activeInHierarchy)

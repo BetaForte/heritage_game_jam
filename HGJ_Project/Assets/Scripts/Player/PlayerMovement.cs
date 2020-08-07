@@ -42,6 +42,8 @@ public class PlayerMovement : MonoBehaviour
 
     WhiteboardKiller whiteboard;
 
+    bool isSoundPlayed = false;
+
     private void Awake()
     {
         scoreScript = GetComponent<Score>();
@@ -123,9 +125,18 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator DamageSpin(float duration)
     {
+        int playRandomHitFX = Random.Range(5, 11);
+        if(!isSoundPlayed)
+        {
+            SoundManager.instance.PlaySFX(playRandomHitFX);
+            isSoundPlayed = true;
+        }
+
         transform.Rotate(0, 1000f * Time.deltaTime, 0);
         yield return new WaitForSeconds(duration);
         isHit = false;
+        SoundManager.instance.StopSFX(playRandomHitFX);
+        isSoundPlayed = false;
     }
 
     private void RotationInput()
@@ -195,6 +206,8 @@ public class PlayerMovement : MonoBehaviour
 
                 if (chargeValue >= chargeTime)
                 {
+                    SoundManager.instance.StopSFX(2);
+                    SoundManager.instance.PlaySFX(4);
                     charging = false;
                     fired = true;
                     releasedDirection = transform.forward;
@@ -203,8 +216,14 @@ public class PlayerMovement : MonoBehaviour
 
             }
 
+
+            if (Input.GetKeyDown(KeyCode.M))
+                SoundManager.instance.PlaySFX(2);
+
             if (Input.GetKeyUp(KeyCode.M))
             {
+                SoundManager.instance.StopSFX(2);
+                SoundManager.instance.PlaySFX(4);
                 releasedDirection = transform.forward;
                 charging = false;
                 fired = true;
@@ -223,6 +242,8 @@ public class PlayerMovement : MonoBehaviour
 
                 if (chargeValue >= chargeTime)
                 {
+                    SoundManager.instance.StopSFX(1);
+                    SoundManager.instance.PlaySFX(3);
                     charging = false;
                     fired = true;
                     releasedDirection = transform.forward;
@@ -231,8 +252,13 @@ public class PlayerMovement : MonoBehaviour
 
             }
 
+            if(Input.GetKeyDown(KeyCode.Space))
+                SoundManager.instance.PlaySFX(1);
+
             if (Input.GetKeyUp(KeyCode.Space))
             {
+                SoundManager.instance.StopSFX(1);
+                SoundManager.instance.PlaySFX(3);
                 releasedDirection = transform.forward;
                 charging = false;
                 fired = true;
@@ -244,6 +270,11 @@ public class PlayerMovement : MonoBehaviour
     {
         if (fired)
         {
+            if(isPlayer2)
+                SoundManager.instance.StopSFX(2);
+            else
+                SoundManager.instance.StopSFX(1);
+
             AddFiringEffects();
 
             hitCollider.enabled = true;
@@ -333,6 +364,20 @@ public class PlayerMovement : MonoBehaviour
         GetComponent<MeshRenderer>().enabled = false;
         cinemachine.enabled = false;
         isDead = true;
+
+        if(scoreScript.lastVehicleInContact != null)
+        {
+            if (scoreScript.lastVehicleInContact.name == "Player1")
+            {
+                SoundManager.instance.PlaySFX(12);
+            }
+
+
+            if (scoreScript.lastVehicleInContact.name == "Player2")
+            {
+                SoundManager.instance.PlaySFX(13);
+            }
+        }
     }
 
     public void Respawn()
@@ -367,6 +412,7 @@ public class PlayerMovement : MonoBehaviour
 
                 whiteboard.Killer(scoreScript.lastVehicleInContact.name, scoreScript.gameObject.name);
 
+
                 killerScore.lastVehicleInContact = null;
                 killerScore.score++;
             }
@@ -383,7 +429,12 @@ public class PlayerMovement : MonoBehaviour
             isGrounded = true;
         }
 
-        if(other.tag != "Ground")
+        if (other.tag == "Player")
+        {
+            isGrounded = true;
+        }
+
+        if (other.tag != "Ground")
         {
             isGrounded = false;
         }

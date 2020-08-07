@@ -38,6 +38,8 @@ public class AIController : MonoBehaviour
 
     WhiteboardKiller whiteboard;
 
+    bool isSoundPlayed = false;
+
 
 
     private void Awake()
@@ -146,9 +148,18 @@ public class AIController : MonoBehaviour
 
     private IEnumerator DamageSpin(float duration)
     {
+        int playRandomHitFX = Random.Range(5, 11);
+        if(!isSoundPlayed)
+        {
+            SoundManager.instance.PlaySFX(playRandomHitFX);
+            isSoundPlayed = true;
+        }
+
         transform.Rotate(0, 1000f * Time.deltaTime, 0);
         yield return new WaitForSeconds(duration);
         isHit = false;
+        SoundManager.instance.StopSFX(playRandomHitFX);
+        isSoundPlayed = false;
     }
 
     private void MovementUpdate()
@@ -201,6 +212,20 @@ public class AIController : MonoBehaviour
         GetComponent<MeshRenderer>().enabled = false;
         isDead = true;
         fired = false;
+
+        if (scoreScript.lastVehicleInContact != null)
+        {
+            if (scoreScript.lastVehicleInContact.name == "Player1")
+            {
+                SoundManager.instance.PlaySFX(12);
+            }
+
+
+            if (scoreScript.lastVehicleInContact.name == "Player2")
+            {
+                SoundManager.instance.PlaySFX(13);
+            }
+        }
     }
 
     public void Respawn()
@@ -225,6 +250,7 @@ public class AIController : MonoBehaviour
                 Score killerScore = killer.GetComponent<Score>();
 
                 whiteboard.Killer(scoreScript.gameObject.name, scoreScript.lastVehicleInContact.name);
+
 
                 killerScore.lastVehicleInContact = null;
                 killerScore.score++;

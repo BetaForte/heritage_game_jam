@@ -14,13 +14,8 @@ public class MenuTransitionBasic : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        Time.timeScale = 1;
+        SoundManager.instance.playLobbyMusic = false;
     }
 
     public void NextPage()
