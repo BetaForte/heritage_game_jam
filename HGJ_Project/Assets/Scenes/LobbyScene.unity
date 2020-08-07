@@ -29092,7 +29092,7 @@ PrefabInstance:
     - target: {fileID: 6498950937838602464, guid: 9c8849ff05fa6d44ba78850790f5a64d,
         type: 3}
       propertyPath: vehicleTypes.Array.data[1].vehicleMaxSpeed
-      value: 20
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6498950937838602464, guid: 9c8849ff05fa6d44ba78850790f5a64d,
         type: 3}
@@ -29123,7 +29123,7 @@ PrefabInstance:
     - target: {fileID: 6498950937838602464, guid: 9c8849ff05fa6d44ba78850790f5a64d,
         type: 3}
       propertyPath: vehicleTypes.Array.data[2].vehicleMaxSpeed
-      value: 20
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6498950937838602464, guid: 9c8849ff05fa6d44ba78850790f5a64d,
         type: 3}
@@ -29164,7 +29164,7 @@ PrefabInstance:
     - target: {fileID: 6498950937838602464, guid: 9c8849ff05fa6d44ba78850790f5a64d,
         type: 3}
       propertyPath: vehicleTypes.Array.data[3].vehicleMaxSpeed
-      value: 20
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6498950937838602464, guid: 9c8849ff05fa6d44ba78850790f5a64d,
         type: 3}
@@ -29248,7 +29248,7 @@ PrefabInstance:
     - target: {fileID: 6498950937838602464, guid: 9c8849ff05fa6d44ba78850790f5a64d,
         type: 3}
       propertyPath: vehicleTypes.Array.data[5].vehicleMaxSpeed
-      value: 20
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6498950937838602464, guid: 9c8849ff05fa6d44ba78850790f5a64d,
         type: 3}
@@ -29279,7 +29279,7 @@ PrefabInstance:
     - target: {fileID: 6498950937838602464, guid: 9c8849ff05fa6d44ba78850790f5a64d,
         type: 3}
       propertyPath: vehicleTypes.Array.data[6].vehicleMaxSpeed
-      value: 20
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6498950937838602464, guid: 9c8849ff05fa6d44ba78850790f5a64d,
         type: 3}
@@ -29310,7 +29310,7 @@ PrefabInstance:
     - target: {fileID: 6498950937838602464, guid: 9c8849ff05fa6d44ba78850790f5a64d,
         type: 3}
       propertyPath: vehicleTypes.Array.data[7].vehicleMaxSpeed
-      value: 20
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6498950937838602464, guid: 9c8849ff05fa6d44ba78850790f5a64d,
         type: 3}
@@ -29341,7 +29341,7 @@ PrefabInstance:
     - target: {fileID: 6498950937838602464, guid: 9c8849ff05fa6d44ba78850790f5a64d,
         type: 3}
       propertyPath: vehicleTypes.Array.data[8].vehicleMaxSpeed
-      value: 20
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6498950937838602464, guid: 9c8849ff05fa6d44ba78850790f5a64d,
         type: 3}
@@ -29351,7 +29351,7 @@ PrefabInstance:
     - target: {fileID: 6498950937838602464, guid: 9c8849ff05fa6d44ba78850790f5a64d,
         type: 3}
       propertyPath: vehicleTypes.Array.data[0].vehicleMaxSpeed
-      value: 20
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6498950937838602465, guid: 9c8849ff05fa6d44ba78850790f5a64d,
         type: 3}
