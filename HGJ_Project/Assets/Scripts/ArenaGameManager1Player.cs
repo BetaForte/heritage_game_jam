@@ -121,11 +121,6 @@ public class ArenaGameManager1Player : MonoBehaviour
         if (isRoundOver)
         {
             Time.timeScale = 0;
-            if(!isPlayingBGM)
-            {
-                SoundManager.instance.bgm[0].Play();
-                isPlayingBGM = true;
-            }
             roundOverPanel.SetActive(true);
 
             if (player1.gameObject.activeInHierarchy)
@@ -218,12 +213,9 @@ public class ArenaGameManager1Player : MonoBehaviour
 
                 for (int i = 0; i < players.Count; i++)
                 {
-                    for (int j = 0; j < players.Count; j++)
+                    if(players[i].score > highestScore)
                     {
-                        if (players[j].score > players[i].score)
-                        {
-                            highestScore = players[j].score;
-                        }
+                        highestScore = players[i].score;
                     }
                 }
 
@@ -269,6 +261,12 @@ public class ArenaGameManager1Player : MonoBehaviour
     {
         roundStartTimerText.text = "GO!";
         yield return new WaitForSeconds(1f);
+
+        if (!isPlayingBGM)
+        {
+            SoundManager.instance.bgm[0].Play();
+            isPlayingBGM = true;
+        }
 
         hasRoundStart = true;
         roundStartPanel.SetActive(false);

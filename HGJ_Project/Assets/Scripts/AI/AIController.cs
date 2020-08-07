@@ -155,6 +155,8 @@ public class AIController : MonoBehaviour
             isSoundPlayed = true;
         }
 
+        GetComponent<GenerateSmoke>().PlayHit();
+
         transform.Rotate(0, 1000f * Time.deltaTime, 0);
         yield return new WaitForSeconds(duration);
         isHit = false;
@@ -249,7 +251,7 @@ public class AIController : MonoBehaviour
                 GameObject killer = scoreScript.lastVehicleInContact;
                 Score killerScore = killer.GetComponent<Score>();
 
-                whiteboard.Killer(scoreScript.gameObject.name, scoreScript.lastVehicleInContact.name);
+                whiteboard.Killer(killerScore.name, killerScore.lastVehicleInContact.name);
 
 
                 killerScore.lastVehicleInContact = null;
