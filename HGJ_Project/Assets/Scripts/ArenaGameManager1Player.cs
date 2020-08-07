@@ -213,12 +213,9 @@ public class ArenaGameManager1Player : MonoBehaviour
 
                 for (int i = 0; i < players.Count; i++)
                 {
-                    for (int j = 0; j < players.Count; j++)
+                    if(players[i].score > highestScore)
                     {
-                        if (players[j].score > players[i].score)
-                        {
-                            highestScore = players[j].score;
-                        }
+                        highestScore = players[i].score;
                     }
                 }
 

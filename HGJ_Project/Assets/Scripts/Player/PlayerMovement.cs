@@ -414,7 +414,7 @@ public class PlayerMovement : MonoBehaviour
                 GameObject killer = scoreScript.lastVehicleInContact;
                 Score killerScore = killer.GetComponent<Score>();
 
-                whiteboard.Killer(scoreScript.lastVehicleInContact.name, scoreScript.gameObject.name);
+                whiteboard.Killer(killerScore.name, killerScore.lastVehicleInContact.name);
 
 
                 killerScore.lastVehicleInContact = null;

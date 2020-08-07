@@ -251,7 +251,7 @@ public class AIController : MonoBehaviour
                 GameObject killer = scoreScript.lastVehicleInContact;
                 Score killerScore = killer.GetComponent<Score>();
 
-                whiteboard.Killer(scoreScript.gameObject.name, scoreScript.lastVehicleInContact.name);
+                whiteboard.Killer(killerScore.name, killerScore.lastVehicleInContact.name);
 
 
                 killerScore.lastVehicleInContact = null;
