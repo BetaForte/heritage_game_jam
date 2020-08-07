@@ -414,7 +414,10 @@ public class PlayerMovement : MonoBehaviour
                 GameObject killer = scoreScript.lastVehicleInContact;
                 Score killerScore = killer.GetComponent<Score>();
 
-                whiteboard.Killer(killerScore.name, killerScore.lastVehicleInContact.name);
+                if (killerScore.lastVehicleInContact != null && killerScore != null)
+                {
+                    whiteboard.Killer(killerScore.name, killerScore.lastVehicleInContact.name);
+                }
 
 
                 killerScore.lastVehicleInContact = null;
@@ -441,6 +444,27 @@ public class PlayerMovement : MonoBehaviour
         if (other.tag != "Ground")
         {
             isGrounded = false;
+        }
+
+        if (other.tag == "Deadzone")
+        {
+            if (scoreScript.lastVehicleInContact != null)
+            {
+                GameObject killer = scoreScript.lastVehicleInContact;
+                Score killerScore = killer.GetComponent<Score>();
+
+                if (killerScore.lastVehicleInContact != null && killerScore != null)
+                {
+                    whiteboard.Killer(killerScore.name, killerScore.lastVehicleInContact.name);
+                }
+
+
+                killerScore.lastVehicleInContact = null;
+                killerScore.score++;
+            }
+
+            Die();
+
         }
     }
 

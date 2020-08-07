@@ -251,12 +251,14 @@ public class AIController : MonoBehaviour
                 GameObject killer = scoreScript.lastVehicleInContact;
                 Score killerScore = killer.GetComponent<Score>();
 
-                whiteboard.Killer(killerScore.name, killerScore.lastVehicleInContact.name);
+                if(killerScore.lastVehicleInContact != null && killerScore != null)
+                {
+                    whiteboard.Killer(killerScore.name, killerScore.lastVehicleInContact.name);
+                }
 
 
                 killerScore.lastVehicleInContact = null;
                 killerScore.score++;
-
                 
             }
 
@@ -270,6 +272,27 @@ public class AIController : MonoBehaviour
         if (other.tag == "Ground")
         {
             isGrounded = true;
+        }
+
+        if (other.tag == "Deadzone")
+        {
+            if (scoreScript.lastVehicleInContact != null)
+            {
+                GameObject killer = scoreScript.lastVehicleInContact;
+                Score killerScore = killer.GetComponent<Score>();
+
+                if (killerScore.lastVehicleInContact != null && killerScore != null)
+                {
+                    whiteboard.Killer(killerScore.name, killerScore.lastVehicleInContact.name);
+                }
+
+
+                killerScore.lastVehicleInContact = null;
+                killerScore.score++;
+            }
+
+            Die();
+
         }
     }
 
