@@ -5,6 +5,7 @@ using UnityEngine;
 public class GenerateSmoke : MonoBehaviour
 {
     public GameObject particle;
+    public GameObject hitParticle;
     AIController aiCon;
     PlayerMovement playerCon;
     // Start is called before the first frame update
@@ -12,6 +13,11 @@ public class GenerateSmoke : MonoBehaviour
     {
         aiCon = GetComponent<AIController>();
         playerCon = GetComponent<PlayerMovement>();
+
+        Transform hitChild = transform.Find("HitParticle");
+        if(hitChild)
+            hitParticle = transform.Find("HitParticle").gameObject;
+
     }
 
     // Update is called once per frame
@@ -33,5 +39,10 @@ public class GenerateSmoke : MonoBehaviour
                 particle.SetActive(false);
             //particle.SetActive(Vector3.SqrMagnitude(GetComponent<Rigidbody>().velocity) > 0 && playerCon.isGrounded);
         }
+    }
+
+    public void PlayHit()
+    {
+        hitParticle.GetComponent<ParticleSystem>().Play();
     }
 }
