@@ -276,6 +276,7 @@ public class AIController : MonoBehaviour
 
         if (other.tag == "Deadzone")
         {
+            SoundManager.instance.PlaySFX(15);
             if (scoreScript.lastVehicleInContact != null)
             {
                 GameObject killer = scoreScript.lastVehicleInContact;
