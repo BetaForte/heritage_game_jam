@@ -5295,7 +5295,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7063367803288013797}
-  m_LocalRotation: {x: 0.12899207, y: 0.000000017062634, z: -0.0000000022194866, w: 0.99164563}
+  m_LocalRotation: {x: 0.12899207, y: 0.00000001706263, z: -0.0000000022194864, w: 0.99164563}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -5458,7 +5458,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highlightSound: 0
-  clickSound: 0
+  clickSound: 14
 --- !u!114 &6027657954602392452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5472,7 +5472,47 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highlightSound: 0
-  clickSound: 0
+  clickSound: 14
+--- !u!1 &6027657954602392453 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7713058675539327110, guid: a81233f4be5ef3542a1630850ab48f78,
+    type: 3}
+  m_PrefabInstance: {fileID: 6027657954602392448}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6027657954602392454 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7713058675650539054, guid: a81233f4be5ef3542a1630850ab48f78,
+    type: 3}
+  m_PrefabInstance: {fileID: 6027657954602392448}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6027657954602392455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6027657954602392453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c40d9f0554cf19418fe776b0663b635, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highlightSound: 0
+  clickSound: 14
+--- !u!114 &6027657954602392456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6027657954602392454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c40d9f0554cf19418fe776b0663b635, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highlightSound: 0
+  clickSound: 14
 --- !u!4 &6038915208774651423
 Transform:
   m_ObjectHideFlags: 3
@@ -6091,7 +6131,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8104290759927249664}
-  m_LocalRotation: {x: 0.16492842, y: -0.000000016970748, z: 0.000000002837821, w: 0.9863056}
+  m_LocalRotation: {x: 0.16492842, y: 0.000000016970748, z: -0.000000002837821, w: 0.9863056}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
