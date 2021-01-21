@@ -50,6 +50,7 @@ public class PlayerMovement : MonoBehaviour
     bool rightHeld = false;
     bool leftHeld = false;
     bool mobileCharge = false;
+    bool isMobile = false;
 
     private void Awake()
     {
@@ -63,6 +64,14 @@ public class PlayerMovement : MonoBehaviour
 
         whiteboard = FindObjectOfType<WhiteboardKiller>();
 
+#if UNITY_EDITOR || UNITY_STANDALONE_WIN
+        uiInputs.SetActive(false);
+        isMobile = false;
+        postProcessing.enabled = false;
+#elif UNITY_ANDROID || UNITY_IOS
+        uiInputs.SetActive(true);
+        isMobile = true;
+#endif
 
     }
 
@@ -179,10 +188,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        uiInputs.SetActive(false);
-#elif UNITY_ANDROID || UNITY_IOS
 
-            uiInputs.SetActive(true);
 
 #endif
     }
@@ -278,7 +284,10 @@ public class PlayerMovement : MonoBehaviour
             else
                 SoundManager.instance.StopSFX(1);
 
-            AddFiringEffects();
+            if(!isMobile)
+            {
+                AddFiringEffects();
+            }
 
             hitCollider.enabled = true;
             currentDirection = transform.forward;
@@ -323,6 +332,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void AddFiringEffects()
     {
+        if (postProcessing == null) return;
         if (cinemachine.m_Lens.FieldOfView <= 45)
             cinemachine.m_Lens.FieldOfView += Time.deltaTime * 2f;
 
@@ -416,12 +426,11 @@ public class PlayerMovement : MonoBehaviour
 
                 if (killerScore.lastVehicleInContact != null && killerScore != null)
                 {
-                    whiteboard.Killer(killerScore.name, killerScore.lastVehicleInContact.name);
+                    whiteboard.Killer(killerScore, killerScore.lastVehicleInContact);
+                    killerScore.AddScore();
                 }
 
-
                 killerScore.lastVehicleInContact = null;
-                killerScore.score++;
             }
 
             Die();
@@ -548,12 +557,11 @@ public class PlayerMovement : MonoBehaviour
 
                 if (killerScore.lastVehicleInContact != null && killerScore != null)
                 {
-                    whiteboard.Killer(killerScore.name, killerScore.lastVehicleInContact.name);
+                    whiteboard.Killer(killerScore, killerScore.lastVehicleInContact);
+                    killerScore.AddScore();
                 }
 
-
                 killerScore.lastVehicleInContact = null;
-                killerScore.score++;
             }
 
             Die();

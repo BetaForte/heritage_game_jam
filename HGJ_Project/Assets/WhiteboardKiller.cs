@@ -17,17 +17,17 @@ public class WhiteboardKiller : MonoBehaviour
     }
 
 
-    public void Killer(string killer, string killed)
+    public void Killer(Score killer, GameObject killed)
     {
         StartCoroutine(KillerCoroutine(killer, killed));
     }
 
-    private IEnumerator KillerCoroutine(string killer, string killed)
+    private IEnumerator KillerCoroutine(Score killer, GameObject killed)
     {
         foreach (Text text in playerKilled)
         {
             text.gameObject.SetActive(true);
-            text.text = killer + " has killed " + killed;
+            text.text = killer.name + " has killed " + killed.name;
         }
 
         yield return new WaitForSeconds(5f);

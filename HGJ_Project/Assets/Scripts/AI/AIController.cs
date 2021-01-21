@@ -251,12 +251,12 @@ public class AIController : MonoBehaviour
 
                 if(killerScore.lastVehicleInContact != null && killerScore != null)
                 {
-                    whiteboard.Killer(killerScore.name, killerScore.lastVehicleInContact.name);
+                    whiteboard.Killer(killerScore, killerScore.lastVehicleInContact);
+                    killerScore.AddScore();
                 }
 
                 killerScore.lastVehicleInContact = null;
-                killerScore.score++;
-                
+
             }
 
             Die();
@@ -281,12 +281,12 @@ public class AIController : MonoBehaviour
 
                 if (killerScore.lastVehicleInContact != null && killerScore != null)
                 {
-                    whiteboard.Killer(killerScore.name, killerScore.lastVehicleInContact.name);
+                    whiteboard.Killer(killerScore, killerScore.lastVehicleInContact);
+                    killerScore.AddScore();
                 }
 
 
                 killerScore.lastVehicleInContact = null;
-                killerScore.score++;
             }
 
             Die();

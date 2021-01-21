@@ -16,7 +16,25 @@ public class Score : MonoBehaviour
     public GameObject lastVehicleInContact;
     public int score;
 
-    
+    public float delay;
+
+    private void Update()
+    {
+        if(delay > 0)
+        {
+            delay -= Time.deltaTime;
+        }
+    }
+
+    public void AddScore()
+    {
+        if(delay <= 0)
+        {
+            Debug.Log(gameObject.name + " score added!");
+            score++;
+            delay = 0.5f;
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {
