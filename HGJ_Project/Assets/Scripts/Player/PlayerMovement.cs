@@ -43,7 +43,13 @@ public class PlayerMovement : MonoBehaviour
     WhiteboardKiller whiteboard;
     GenerateSmoke smoke;
 
+    public GameObject uiInputs;
+
     bool isSoundPlayed = false;
+
+    bool rightHeld = false;
+    bool leftHeld = false;
+    bool mobileCharge = false;
 
     private void Awake()
     {
@@ -93,6 +99,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        MobileControls();
+
         if(arenaGM == null)
         {
             if (!arenaGM1.hasRoundStart || arenaGM1.isRoundOver) return;
@@ -145,30 +153,38 @@ public class PlayerMovement : MonoBehaviour
 
     private void RotationInput()
     {
+#if UNITY_EDITOR ||UNITY_STANDALONE_WIN
         if (!isPlayer2)
         {
             if (Input.GetKey(KeyCode.D))
             {
-                transform.rotation = Quaternion.Euler(0f, rotationSpeed * Time.deltaTime, 0f) * transform.rotation;
+                TurnRight();
             }
 
             if (Input.GetKey(KeyCode.A))
             {
-                transform.rotation = Quaternion.Euler(0f, -rotationSpeed * Time.deltaTime, 0f) * transform.rotation;
+                TurnLeft();
             }
         }
         else if(isPlayer2)
         {
             if (Input.GetKey(KeyCode.RightArrow))
             {
-                transform.rotation = Quaternion.Euler(0f, rotationSpeed * Time.deltaTime, 0f) * transform.rotation;
+                TurnRight();
             }
 
             if (Input.GetKey(KeyCode.LeftArrow))
             {
-                transform.rotation = Quaternion.Euler(0f, -rotationSpeed * Time.deltaTime, 0f) * transform.rotation;
+                TurnLeft();
             }
         }
+
+        uiInputs.SetActive(false);
+#elif UNITY_ANDROID || UNITY_IOS
+
+            uiInputs.SetActive(true);
+
+#endif
     }
 
     private void FixPlayerRotation()
@@ -238,34 +254,17 @@ public class PlayerMovement : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.Space))
             {
-                if (!fired)
-                {
-                    chargeValue += Time.deltaTime;
-                    charging = true;
-                }
-
-                if (chargeValue >= chargeTime)
-                {
-                    SoundManager.instance.StopSFX(1);
-                    SoundManager.instance.PlaySFX(3);
-                    charging = false;
-                    fired = true;
-                    releasedDirection = transform.forward;
-                    rb.velocity = transform.forward * chargeValue;
-                }
-
+                OnChargeKeyHeld();
             }
 
             if(Input.GetKeyDown(KeyCode.Space))
-                SoundManager.instance.PlaySFX(1);
+            {
+                OnChargeKeyDown();
+            }
 
             if (Input.GetKeyUp(KeyCode.Space))
             {
-                SoundManager.instance.StopSFX(1);
-                SoundManager.instance.PlaySFX(3);
-                releasedDirection = transform.forward;
-                charging = false;
-                fired = true;
+                OnChargeKeyUp();
             }
         }
     }
@@ -428,6 +427,99 @@ public class PlayerMovement : MonoBehaviour
             Die();
 
         }
+    }
+
+    public void TurnRight()
+    {
+        transform.rotation = Quaternion.Euler(0f, rotationSpeed * Time.deltaTime, 0f) * transform.rotation;
+    }
+
+    public void TurnLeft()
+    {
+        transform.rotation = Quaternion.Euler(0f, -rotationSpeed * Time.deltaTime, 0f) * transform.rotation;
+    }
+
+    public void OnChargeKeyUp()
+    {
+        if (!fired)
+        {
+            SoundManager.instance.StopSFX(1);
+            SoundManager.instance.PlaySFX(3);
+        }
+        releasedDirection = transform.forward;
+        charging = false;
+        fired = true;
+    }
+
+    public void OnChargeKeyDown()
+    {
+        SoundManager.instance.PlaySFX(1);
+    }
+
+    public void OnChargeKeyHeld()
+    {
+        if (!fired)
+        {
+            chargeValue += Time.deltaTime;
+            charging = true;
+        }
+
+        if (chargeValue >= chargeTime)
+        {
+            SoundManager.instance.StopSFX(1);
+            SoundManager.instance.PlaySFX(3);
+            charging = false;
+            fired = true;
+            releasedDirection = transform.forward;
+            rb.velocity = transform.forward * chargeValue;
+        }
+    }
+
+    private void MobileControls()
+    {
+        if (rightHeld)
+        {
+            TurnRight();
+        }
+        if (leftHeld)
+        {
+            TurnLeft();
+        }
+
+        if(mobileCharge)
+        {
+            OnChargeKeyHeld();
+        }
+    }
+
+    public void RightButtonClicked()
+    {
+        rightHeld = true;
+    }
+
+    public void RightButtonReleased()
+    {
+        rightHeld = false;
+    }
+
+    public void LeftButtonClicked()
+    {
+        leftHeld = true;
+    }
+
+    public void LeftButtonReleased()
+    {
+        leftHeld = false;
+    }
+
+    public void ChargeButtonClicked()
+    {
+        mobileCharge = true;
+    }
+
+    public void ChargeButtonReleased()
+    {
+        mobileCharge = false;
     }
 
     private void OnTriggerStay(Collider other)

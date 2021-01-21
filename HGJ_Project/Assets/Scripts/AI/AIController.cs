@@ -244,8 +244,6 @@ public class AIController : MonoBehaviour
     {
         if (other.tag == "Deadzone")
         {
-
-
             if (scoreScript.lastVehicleInContact != null)
             {
                 GameObject killer = scoreScript.lastVehicleInContact;
@@ -255,7 +253,6 @@ public class AIController : MonoBehaviour
                 {
                     whiteboard.Killer(killerScore.name, killerScore.lastVehicleInContact.name);
                 }
-
 
                 killerScore.lastVehicleInContact = null;
                 killerScore.score++;

@@ -14,6 +14,11 @@ public class ArenaGameManager1Player : MonoBehaviour
     public Score player3;
     public Score player4;
 
+    public int player1Scorevalue;
+    public int player2Scorevalue;
+    public int player3Scorevalue;
+    public int player4Scorevalue;
+
     public bool hasRoundStart;
     public bool isRoundOver;
 
@@ -82,6 +87,11 @@ public class ArenaGameManager1Player : MonoBehaviour
     {
         RoundStartUpdate();
 
+        player1Scorevalue = player1.score;
+        player2Scorevalue = player2.score;
+        player3Scorevalue = player3.score;
+        player4Scorevalue = player4.score;
+
         UpdateLeaderboard();
 
         if (!pausePanel.activeInHierarchy && Input.GetKeyDown(KeyCode.Escape))
@@ -106,13 +116,9 @@ public class ArenaGameManager1Player : MonoBehaviour
         if (player2.gameObject.activeInHierarchy)
             players.Add(player2);
         if (player3.gameObject.activeInHierarchy)
-        {
             players.Add(player3);
-        }
         if (player4.gameObject.activeInHierarchy)
-        {
             players.Add(player4);
-        }
 
     }
 

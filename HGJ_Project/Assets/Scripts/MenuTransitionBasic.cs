@@ -11,11 +11,30 @@ public class MenuTransitionBasic : MonoBehaviour
 
     public GameObject loadingPage;
 
+    public GameObject LobbyPanelPage;
+
     // Start is called before the first frame update
     void Start()
     {
         Time.timeScale = 1;
         SoundManager.instance.playLobbyMusic = false;
+    }
+
+    public void OnPlayButtonClicked()
+    {
+#if UNITY_EDITOR || UNITY_STANDALONE_WIN
+
+        gameObject.SetActive(false);
+        CustomPage(0);
+
+#elif UNITY_ANDROID || UNITY_IOS
+
+        gameObject.SetActive(false);
+        LobbyPanelPage.SetActive(true);
+
+
+#endif
+
     }
 
     public void NextPage()

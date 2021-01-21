@@ -2569,6 +2569,7 @@ MonoBehaviour:
   customPages:
   - {fileID: 2005087826}
   loadingPage: {fileID: 0}
+  LobbyPanelPage: {fileID: 0}
 --- !u!1 &236148483
 GameObject:
   m_ObjectHideFlags: 0
@@ -8889,8 +8890,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1504233890}
-        m_MethodName: CustomPage
-        m_Mode: 3
+        m_MethodName: OnPlayButtonClicked
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -11278,6 +11279,7 @@ MonoBehaviour:
   prevPage: {fileID: 233798122}
   customPages: []
   loadingPage: {fileID: 1005593450}
+  LobbyPanelPage: {fileID: 0}
 --- !u!1 &829599537
 GameObject:
   m_ObjectHideFlags: 0
@@ -18724,6 +18726,7 @@ MonoBehaviour:
   prevPage: {fileID: 1504233889}
   customPages: []
   loadingPage: {fileID: 0}
+  LobbyPanelPage: {fileID: 0}
 --- !u!224 &1277525917
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20223,6 +20226,7 @@ MonoBehaviour:
   prevPage: {fileID: 233798122}
   customPages: []
   loadingPage: {fileID: 1005593450}
+  LobbyPanelPage: {fileID: 0}
 --- !u!1 &1433418494
 GameObject:
   m_ObjectHideFlags: 0
@@ -21215,6 +21219,7 @@ MonoBehaviour:
   - {fileID: 2097391723}
   - {fileID: 1277525915}
   loadingPage: {fileID: 0}
+  LobbyPanelPage: {fileID: 825398496}
 --- !u!224 &1504233891
 RectTransform:
   m_ObjectHideFlags: 0
@@ -21274,6 +21279,7 @@ MonoBehaviour:
   prevPage: {fileID: 1504233889}
   customPages: []
   loadingPage: {fileID: 0}
+  LobbyPanelPage: {fileID: 0}
 --- !u!224 &1506824152
 RectTransform:
   m_ObjectHideFlags: 0
@@ -27684,6 +27690,7 @@ MonoBehaviour:
   prevPage: {fileID: 233798122}
   customPages: []
   loadingPage: {fileID: 1005593450}
+  LobbyPanelPage: {fileID: 0}
 --- !u!1 &2014952026
 GameObject:
   m_ObjectHideFlags: 0
@@ -28410,6 +28417,7 @@ MonoBehaviour:
   prevPage: {fileID: 1504233889}
   customPages: []
   loadingPage: {fileID: 0}
+  LobbyPanelPage: {fileID: 0}
 --- !u!224 &2097391725
 RectTransform:
   m_ObjectHideFlags: 0
