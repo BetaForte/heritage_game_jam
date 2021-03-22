@@ -22,7 +22,7 @@ public class MenuTransitionBasic : MonoBehaviour
 
     public void OnPlayButtonClicked()
     {
-#if UNITY_EDITOR || UNITY_STANDALONE_WIN
+#if UNITY_EDITOR || UNITY_STANDALONE_WIN || UNITY_WEBGL
 
         gameObject.SetActive(false);
         CustomPage(0);

@@ -2664,7 +2664,6 @@ MonoBehaviour:
   player: 3
   vehicles:
   - {fileID: 554898906}
-  - {fileID: 1911040202}
   - {fileID: 1255028467}
   - {fileID: 1523401685}
   - {fileID: 277550457}
@@ -6377,7 +6376,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &455467973
 RectTransform:
   m_ObjectHideFlags: 0
@@ -18642,7 +18641,6 @@ MonoBehaviour:
   player: 3
   vehicles:
   - {fileID: 1974684117}
-  - {fileID: 1082115969}
   - {fileID: 281767155}
   - {fileID: 1278764963}
   - {fileID: 815649666}
@@ -29095,7 +29093,7 @@ PrefabInstance:
     - target: {fileID: 6498950937838602464, guid: 9c8849ff05fa6d44ba78850790f5a64d,
         type: 3}
       propertyPath: vehicleTypes.Array.size
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6498950937838602464, guid: 9c8849ff05fa6d44ba78850790f5a64d,
         type: 3}
@@ -29110,7 +29108,7 @@ PrefabInstance:
     - target: {fileID: 6498950937838602464, guid: 9c8849ff05fa6d44ba78850790f5a64d,
         type: 3}
       propertyPath: vehicleTypes.Array.data[2].vehicleTypeName
-      value: Yellow
+      value: Green
       objectReference: {fileID: 0}
     - target: {fileID: 6498950937838602464, guid: 9c8849ff05fa6d44ba78850790f5a64d,
         type: 3}
@@ -29122,7 +29120,7 @@ PrefabInstance:
         type: 3}
       propertyPath: vehicleTypes.Array.data[2].vehicleMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: f82cb8695ab65464992c7251c672d54a, type: 2}
+      objectReference: {fileID: 2100000, guid: 5cad645d88ad56648a0fc0edcfa978ca, type: 2}
     - target: {fileID: 6498950937838602464, guid: 9c8849ff05fa6d44ba78850790f5a64d,
         type: 3}
       propertyPath: vehicleTypes.Array.data[2].chargeTime
@@ -29151,19 +29149,19 @@ PrefabInstance:
     - target: {fileID: 6498950937838602464, guid: 9c8849ff05fa6d44ba78850790f5a64d,
         type: 3}
       propertyPath: vehicleTypes.Array.data[3].vehicleTypeName
-      value: Green
+      value: The Fool
       objectReference: {fileID: 0}
     - target: {fileID: 6498950937838602464, guid: 9c8849ff05fa6d44ba78850790f5a64d,
         type: 3}
       propertyPath: vehicleTypes.Array.data[3].meshRender
       value: 
-      objectReference: {fileID: -7843526606762953986, guid: 94371bbddf831f24a81400c308471488,
+      objectReference: {fileID: 4298779393402551167, guid: b06b4a65839b2c743bd56035fa160fe9,
         type: 3}
     - target: {fileID: 6498950937838602464, guid: 9c8849ff05fa6d44ba78850790f5a64d,
         type: 3}
       propertyPath: vehicleTypes.Array.data[3].vehicleMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: 5cad645d88ad56648a0fc0edcfa978ca, type: 2}
+      objectReference: {fileID: 2100000, guid: babd5aef8036b5846ac6b0b575cfbdd5, type: 2}
     - target: {fileID: 6498950937838602464, guid: 9c8849ff05fa6d44ba78850790f5a64d,
         type: 3}
       propertyPath: vehicleTypes.Array.data[3].chargeTime
@@ -29172,7 +29170,7 @@ PrefabInstance:
     - target: {fileID: 6498950937838602464, guid: 9c8849ff05fa6d44ba78850790f5a64d,
         type: 3}
       propertyPath: vehicleTypes.Array.data[3].vehicleMaxSpeed
-      value: 15
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6498950937838602464, guid: 9c8849ff05fa6d44ba78850790f5a64d,
         type: 3}
@@ -29204,19 +29202,19 @@ PrefabInstance:
     - target: {fileID: 6498950937838602464, guid: 9c8849ff05fa6d44ba78850790f5a64d,
         type: 3}
       propertyPath: vehicleTypes.Array.data[4].vehicleTypeName
-      value: The Fool
+      value: Joker
       objectReference: {fileID: 0}
     - target: {fileID: 6498950937838602464, guid: 9c8849ff05fa6d44ba78850790f5a64d,
         type: 3}
       propertyPath: vehicleTypes.Array.data[4].meshRender
       value: 
-      objectReference: {fileID: 4298779393402551167, guid: b06b4a65839b2c743bd56035fa160fe9,
+      objectReference: {fileID: -7843526606762953986, guid: 94371bbddf831f24a81400c308471488,
         type: 3}
     - target: {fileID: 6498950937838602464, guid: 9c8849ff05fa6d44ba78850790f5a64d,
         type: 3}
       propertyPath: vehicleTypes.Array.data[4].vehicleMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: babd5aef8036b5846ac6b0b575cfbdd5, type: 2}
+      objectReference: {fileID: 2100000, guid: b945e3a710cedeb4ebf054ff4c98a3c3, type: 2}
     - target: {fileID: 6498950937838602464, guid: 9c8849ff05fa6d44ba78850790f5a64d,
         type: 3}
       propertyPath: vehicleTypes.Array.data[4].chargeTime
@@ -29225,7 +29223,7 @@ PrefabInstance:
     - target: {fileID: 6498950937838602464, guid: 9c8849ff05fa6d44ba78850790f5a64d,
         type: 3}
       propertyPath: vehicleTypes.Array.data[4].vehicleMaxSpeed
-      value: 20
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6498950937838602464, guid: 9c8849ff05fa6d44ba78850790f5a64d,
         type: 3}
@@ -29235,7 +29233,7 @@ PrefabInstance:
     - target: {fileID: 6498950937838602464, guid: 9c8849ff05fa6d44ba78850790f5a64d,
         type: 3}
       propertyPath: vehicleTypes.Array.data[5].vehicleTypeName
-      value: Joker
+      value: Neutron
       objectReference: {fileID: 0}
     - target: {fileID: 6498950937838602464, guid: 9c8849ff05fa6d44ba78850790f5a64d,
         type: 3}
@@ -29247,7 +29245,7 @@ PrefabInstance:
         type: 3}
       propertyPath: vehicleTypes.Array.data[5].vehicleMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: b945e3a710cedeb4ebf054ff4c98a3c3, type: 2}
+      objectReference: {fileID: 2100000, guid: ae082dec88d5d0246aa29271e316dfa5, type: 2}
     - target: {fileID: 6498950937838602464, guid: 9c8849ff05fa6d44ba78850790f5a64d,
         type: 3}
       propertyPath: vehicleTypes.Array.data[5].chargeTime
@@ -29266,7 +29264,7 @@ PrefabInstance:
     - target: {fileID: 6498950937838602464, guid: 9c8849ff05fa6d44ba78850790f5a64d,
         type: 3}
       propertyPath: vehicleTypes.Array.data[6].vehicleTypeName
-      value: Neutron
+      value: Hanakami
       objectReference: {fileID: 0}
     - target: {fileID: 6498950937838602464, guid: 9c8849ff05fa6d44ba78850790f5a64d,
         type: 3}
@@ -29278,7 +29276,7 @@ PrefabInstance:
         type: 3}
       propertyPath: vehicleTypes.Array.data[6].vehicleMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: ae082dec88d5d0246aa29271e316dfa5, type: 2}
+      objectReference: {fileID: 2100000, guid: 073146940aef7bb428cae45c645addf5, type: 2}
     - target: {fileID: 6498950937838602464, guid: 9c8849ff05fa6d44ba78850790f5a64d,
         type: 3}
       propertyPath: vehicleTypes.Array.data[6].chargeTime
@@ -29297,19 +29295,19 @@ PrefabInstance:
     - target: {fileID: 6498950937838602464, guid: 9c8849ff05fa6d44ba78850790f5a64d,
         type: 3}
       propertyPath: vehicleTypes.Array.data[7].vehicleTypeName
-      value: Hanakami
+      value: The Black
       objectReference: {fileID: 0}
     - target: {fileID: 6498950937838602464, guid: 9c8849ff05fa6d44ba78850790f5a64d,
         type: 3}
       propertyPath: vehicleTypes.Array.data[7].meshRender
       value: 
-      objectReference: {fileID: -7843526606762953986, guid: 94371bbddf831f24a81400c308471488,
+      objectReference: {fileID: 4298779393402551167, guid: b06b4a65839b2c743bd56035fa160fe9,
         type: 3}
     - target: {fileID: 6498950937838602464, guid: 9c8849ff05fa6d44ba78850790f5a64d,
         type: 3}
       propertyPath: vehicleTypes.Array.data[7].vehicleMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: 073146940aef7bb428cae45c645addf5, type: 2}
+      objectReference: {fileID: 2100000, guid: 7f7a32e51ed59d643ab592c09d851a88, type: 2}
     - target: {fileID: 6498950937838602464, guid: 9c8849ff05fa6d44ba78850790f5a64d,
         type: 3}
       propertyPath: vehicleTypes.Array.data[7].chargeTime

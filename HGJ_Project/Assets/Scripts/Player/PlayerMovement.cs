@@ -64,12 +64,18 @@ public class PlayerMovement : MonoBehaviour
 
         whiteboard = FindObjectOfType<WhiteboardKiller>();
 
-#if UNITY_EDITOR || UNITY_STANDALONE_WIN
-        uiInputs.SetActive(false);
+#if UNITY_EDITOR || UNITY_STANDALONE_WIN || UNITY_WEBGL
+        if(uiInputs != null)
+        {
+            uiInputs.SetActive(false);
+        }
         isMobile = false;
         postProcessing.enabled = false;
 #elif UNITY_ANDROID || UNITY_IOS
-        uiInputs.SetActive(true);
+        if(uiInputs != null)
+        {
+            uiInputs?.SetActive(true);
+        }
         isMobile = true;
 #endif
 
@@ -162,7 +168,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void RotationInput()
     {
-#if UNITY_EDITOR ||UNITY_STANDALONE_WIN
+#if UNITY_EDITOR ||UNITY_STANDALONE_WIN || UNITY_WEBGL
         if (!isPlayer2)
         {
             if (Input.GetKey(KeyCode.D))
